@@ -5,7 +5,8 @@
       "Bash(cp plugin/prism-base/templates/phase_status.json working_dir/phase_status.json)",
       "Bash(cp plugin/prism-base/templates/source_urls.yaml working_dir/source_urls.yaml)",
       "Bash(cp plugin/prism-base/templates/operator_basis_config.yaml working_dir/operator_basis_config.yaml)",
-      "Bash(cp plugin/prism-base/templates/handoff_contract_template.yaml working_dir/handoff_contract_template.yaml)"
+      "Bash(cp plugin/prism-base/templates/handoff_contract_template.yaml working_dir/handoff_contract_template.yaml)",
+      "Bash(powershell.exe -NoProfile -Command \"Get-ChildItem -LiteralPath 'C:\\\\Users\\\\kipma\\\\OneDrive\\\\4D Tree of Life\\\\1 PRISM BASE\\\\.claude\\\\worktrees\\\\eager-carson-57779e' -Force -ErrorAction Continue | Format-Table -AutoSize Name,Mode,Length\")"
     ]
   }
 }

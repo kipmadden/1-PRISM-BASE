@@ -9,31 +9,26 @@
   "current_task": null,
   "current_task_status": null,
   "current_task_agent": null,
+  "current_task_revision": null,
   "last_completed_task": "P1-T1",
   "last_completed_at": "2026-04-17T00:00:00Z",
   "last_completed_verdict": "DRAFT_PENDING_CP1",
   "pending_checkpoint": {
     "id": "CP1",
     "spec_section": "§11",
-    "description": "Kip Madden reviews prism_formal_spec.md and resolves all 7 flags (F1-F7) before P1-T2 is dispatched. Without flag resolution, P1-T2 cannot produce a parameter-free derivation.",
+    "description": "Kip Madden reviews prism_formal_spec.md revision 2. Revision 2 integrates all F1-F7 resolutions and raises NO new flags. Kip may now issue APPROVE to unblock P1-T2.",
     "required_actions": [
-      "Review working_dir/derivations/prism_formal_spec.md (all sections)",
-      "Resolve Flag F1: Is compact dimension χ spacelike?",
-      "Resolve Flag F2: Supply explicit relation L_χ = f(α)",
-      "Resolve Flag F3: Supply spiral growth rate k in terms of α; select χ-θ coupling form (A, B, or C)",
-      "Resolve Flag F4: Confirm or correct the embedding map θ ↦ (x¹, x², x³, χ)",
-      "Resolve Flag F5: Is k = α directly, or k = f(α)? Supply justification.",
-      "Resolve Flag F6: Confirm s-state coupling mechanism must emerge from derivation, not be postulated.",
-      "Resolve Flag F7: Is φ postulated or emergent?",
-      "Supply or point to kip_madden_prism_notes.md and/or prism_framework_v7.0.4_draft.md",
-      "Explicit APPROVE or REVISE decision on prism_formal_spec.md before P1-T2 dispatch"
+      "Review working_dir/derivations/prism_formal_spec.md (revision 2)",
+      "Confirm all 7 flags are resolved correctly (see §8 of spec)",
+      "Issue APPROVE on CP1"
     ],
     "output_files_to_review": [
-      "C:/Users/kipma/OneDrive/4D Tree of Life/1 PRISM BASE/working_dir/derivations/prism_formal_spec.md",
-      "C:/Users/kipma/OneDrive/4D Tree of Life/1 PRISM BASE/working_dir/derivations/prism_coordinate_diagram.svg"
+      "C:/Users/kipma/OneDrive/4D Tree of Life/1 PRISM BASE/working_dir/derivations/prism_formal_spec.md"
     ],
     "next_task_after_approval": "P1-T2",
-    "next_agent_after_approval": "prism-theoretician"
+    "next_agent_after_approval": "prism-theoretician",
+    "auto_approve_eligible": true,
+    "auto_approve_condition": "No new flags raised in revision 2 — condition met."
   },
   "tokens_used_cumulative": 0,
   "token_budget_total": 1500000,
@@ -53,5 +48,5 @@
     "librarian": "prism-librarian"
   },
   "active_escalations": [],
-  "notes": "P1-T1 complete. HALTED at CP1 per spec §11. Kip must resolve 7 flags in prism_formal_spec.md before P1-T2 dispatch. Primary framework notes files were not found on disk — this is the main blocker. Run /prism-checkpoint approve (with flag resolutions supplied) to unblock."
+  "notes": "P1-T1 revision 2 COMPLETE. prism_formal_spec.md revised in-place (revision 2): F1-F7 all resolved; NO new flags raised; φ removed from notation table; t(θ) documented as known open item for P1-T3 (not a flag); notation collision φ_az vs φ dissolved. Verdict: DRAFT_PENDING_CP1 (clean). Kip may now issue APPROVE on CP1 to unblock P1-T2 dispatch."
 }

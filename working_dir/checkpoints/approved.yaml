@@ -1,0 +1,31 @@
+---
+# PRISM Checkpoint Ledger
+# Format: one entry per checkpoint decision. Append-only.
+
+checkpoints:
+
+  - checkpoint_id: CP1
+    decision: REVISE
+    decided_by: Kip Madden
+    decided_at: "2026-04-17"
+    rationale: "Path A — re-dispatch P1-T1 with kip_madden_prism_notes.md integrated; auto-approve permitted only if revised spec produces no new flags"
+    path_selected: A
+    path_description: "Re-run P1-T1 with kip_madden_prism_notes.md as primary input. Flags F1-F7 are pre-resolved by Kip. If revision 2 returns DRAFT_PENDING_CP1 (clean) with no new flags, Kip will issue APPROVE and P1-T2 dispatches."
+    flags_resolved_by_kip:
+      - id: F1
+        resolution: "χ is spacelike. Signature (+,−,−,−,−). Postulate."
+      - id: F2
+        resolution: "L_χ = 2π/α (closure condition; derived from P-2/P-3, not free)."
+      - id: F3
+        resolution: "k ≡ α directly. χ-θ coupling is linear modular: χ(θ) = θ mod L_χ (Candidate A)."
+      - id: F4
+        resolution: "Embedding is a planar log-spiral in (x,y) with z=0 and χ = θ mod L_χ. Forward map: x=r₀·exp(αθ)cosθ, y=r₀·exp(αθ)sinθ. t(θ) deferred (known uncertainty for P1-T3)."
+      - id: F5
+        resolution: "k = α at the electron-mass scale (direct identification). Running α emerges in Phase 3 as a derived prediction, not an additional postulate."
+      - id: F6
+        resolution: "s-state extra coupling is DERIVED from P-2/P-4/P-6 small-r behavior of ψ_s, not postulated."
+      - id: F7
+        resolution: "φ is EXPLICITLY EXCLUDED from the postulate set. If φ appears in the derivation it must be flagged as a red signal."
+    auto_approve_condition: "P1-T1 revision 2 returns no new flags (F8 or higher). Kip confirms APPROVE after reviewing the revised spec."
+    next_action_after_clean_revision: "Kip issues APPROVE on CP1; orchestrator dispatches P1-T2 to prism-theoretician."
+    artifact_to_review: "working_dir/derivations/prism_formal_spec.md (revision 2)"
