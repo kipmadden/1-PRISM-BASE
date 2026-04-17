@@ -9,17 +9,17 @@
     },
     "1": {
       "name": "First-Principles Derivation",
-      "status": "PENDING",
+      "status": "IN_PROGRESS",
       "critical_path": true,
       "tasks": {
         "P1-T1": {
-          "status": "COMPLETE_REVISION2_PENDING_CP1_APPROVE",
-          "verdict": "DRAFT_PENDING_CP1",
+          "status": "COMPLETE",
+          "verdict": "APPROVED_AT_CP1",
           "revision": 2,
           "dispatched_revision2_at": "2026-04-17T00:00:00Z",
           "agent": "prism-theoretician",
           "cp1_required": true,
-          "cp1_decision": "REVISE",
+          "cp1_decision": "APPROVE",
           "cp1_decided_at": "2026-04-17",
           "cp1_decided_by": "Kip Madden",
           "current_outputs": [

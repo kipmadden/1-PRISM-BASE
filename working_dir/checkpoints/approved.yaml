@@ -5,10 +5,15 @@
 checkpoints:
 
   - checkpoint_id: CP1
-    decision: REVISE
+    decision: APPROVE
     decided_by: Kip Madden
     decided_at: "2026-04-17"
-    rationale: "Path A — re-dispatch P1-T1 with kip_madden_prism_notes.md integrated; auto-approve permitted only if revised spec produces no new flags"
+    rationale: "Revision 2 of prism_formal_spec.md integrated all F1-F7 resolutions verbatim from kip_madden_prism_notes.md and raised zero new flags. Postulate set P-1..P-6, embedding map, and notation table match intent. Auto-approve condition met; Kip confirmed APPROVE."
+    superseded_decision:
+      decision: REVISE
+      decided_at: "2026-04-17"
+      path_selected: A
+      rationale: "Path A — re-dispatch P1-T1 with kip_madden_prism_notes.md integrated; auto-approve permitted only if revised spec produces no new flags"
     path_selected: A
     path_description: "Re-run P1-T1 with kip_madden_prism_notes.md as primary input. Flags F1-F7 are pre-resolved by Kip. If revision 2 returns DRAFT_PENDING_CP1 (clean) with no new flags, Kip will issue APPROVE and P1-T2 dispatches."
     flags_resolved_by_kip:

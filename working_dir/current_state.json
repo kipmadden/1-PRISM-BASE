@@ -3,33 +3,19 @@
   "spec_version": "1.0",
   "principal": "Kip Madden",
   "initialized_at": "2026-04-17T00:00:00Z",
-  "status": "awaiting_checkpoint",
+  "status": "ready_to_dispatch",
   "current_phase": 1,
   "current_phase_name": "First-Principles Derivation",
-  "current_task": null,
-  "current_task_status": null,
-  "current_task_agent": null,
+  "current_task": "P1-T2",
+  "current_task_status": "PENDING",
+  "current_task_agent": "prism-theoretician",
   "current_task_revision": null,
   "last_completed_task": "P1-T1",
   "last_completed_at": "2026-04-17T00:00:00Z",
-  "last_completed_verdict": "DRAFT_PENDING_CP1",
-  "pending_checkpoint": {
-    "id": "CP1",
-    "spec_section": "§11",
-    "description": "Kip Madden reviews prism_formal_spec.md revision 2. Revision 2 integrates all F1-F7 resolutions and raises NO new flags. Kip may now issue APPROVE to unblock P1-T2.",
-    "required_actions": [
-      "Review working_dir/derivations/prism_formal_spec.md (revision 2)",
-      "Confirm all 7 flags are resolved correctly (see §8 of spec)",
-      "Issue APPROVE on CP1"
-    ],
-    "output_files_to_review": [
-      "C:/Users/kipma/OneDrive/4D Tree of Life/1 PRISM BASE/working_dir/derivations/prism_formal_spec.md"
-    ],
-    "next_task_after_approval": "P1-T2",
-    "next_agent_after_approval": "prism-theoretician",
-    "auto_approve_eligible": true,
-    "auto_approve_condition": "No new flags raised in revision 2 — condition met."
-  },
+  "last_completed_verdict": "APPROVED_AT_CP1",
+  "pending_checkpoint": null,
+  "checkpoints_approved": ["CP1"],
+  "checkpoints_remaining": ["CP2", "CP3", "CP4", "CP5"],
   "tokens_used_cumulative": 0,
   "token_budget_total": 1500000,
   "token_budget_phase_cap": 200000,
@@ -48,5 +34,5 @@
     "librarian": "prism-librarian"
   },
   "active_escalations": [],
-  "notes": "P1-T1 revision 2 COMPLETE. prism_formal_spec.md revised in-place (revision 2): F1-F7 all resolved; NO new flags raised; φ removed from notation table; t(θ) documented as known open item for P1-T3 (not a flag); notation collision φ_az vs φ dissolved. Verdict: DRAFT_PENDING_CP1 (clean). Kip may now issue APPROVE on CP1 to unblock P1-T2 dispatch."
+  "notes": "CP1 APPROVED by Kip Madden 2026-04-17. P1-T1 revision 2 (prism_formal_spec.md) is the binding framework. P1-T2 ready to dispatch — wavefunction lift from canonical hydrogen ψ_nℓ(r,θ_pol,φ) to 5D via P-1..P-6 embedding. Run /prism-next to dispatch."
 }
