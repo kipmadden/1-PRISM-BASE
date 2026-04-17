@@ -1,0 +1,7 @@
+# PRISM program audit log
+# Format: ISO-8601-UTC | actor | event | detail
+# Append-only. Every state-changing action by any agent or human checkpoint is logged here.
+2026-04-17T00:00:00Z | prism-init | bootstrap | working_dir initialized; templates copied; phase_status seeded; v3 pipeline staged in phase_0_pipeline/ (v4 absent at bootstrap). Next: /prism-status or /prism-next to dispatch P1-T1.
+2026-04-17T00:00:00Z | prism-orchestrator | dispatch | P1-T1 dispatched to prism-theoretician. Gate check: clear (CP1 fires after P1-T1 output, not before). No depends_on. Outputs expected: working_dir/derivations/prism_formal_spec.md, working_dir/derivations/prism_coordinate_diagram.svg. Step-1-only instruction enforced. Tokens budget phase-1 cap: 200K.
+2026-04-17T00:00:00Z | prism-theoretician | complete | P1-T1 outputs written: prism_formal_spec.md (6 postulates, 7 flags, notation table, coordinate transforms), prism_coordinate_diagram.svg. Source files kip_madden_prism_notes.md and prism_framework_v7.0.4_draft.md not found on disk — 7 flags raised requiring Kip input. Verdict: DRAFT_PENDING_CP1.
+2026-04-17T00:00:00Z | prism-orchestrator | checkpoint | HALTED at CP1 per spec §11. Dispatch of P1-T2 blocked until Kip resolves flags F1-F7 in prism_formal_spec.md and issues explicit APPROVE. Use /prism-checkpoint to proceed.

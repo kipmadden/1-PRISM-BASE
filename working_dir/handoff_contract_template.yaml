@@ -1,0 +1,159 @@
+# PRISM Handoff Contract Template (spec §9)
+#
+# Every artifact produced by the pipeline — derivations, predictions, validation reports,
+# diagnostics, figures, fit results — carries this metadata header. Two delivery modes:
+#
+#   (A) INLINE frontmatter (default for .md, .tex, .py, .yaml text artifacts)
+#       Prepend a YAML front-matter block delimited by --- / --- at the very top of the file.
+#
+#   (B) SIDECAR file (mandatory for binary/tabular artifacts: .csv, .json, .pdf, .png, .h5)
+#       Write <artifact>.meta.yaml in the SAME directory as the artifact.
+#
+# The prism-librarian subagent enforces this contract and will REJECT any artifact that
+# is missing required fields. See skills/prism-handoff-contract/SKILL.md for field
+# validation rules and the reject/repair protocol.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REQUIRED FIELDS
+# ─────────────────────────────────────────────────────────────────────────────
+
+generated_by: <agent_id>                    # one of: prism-orchestrator, prism-data-fetcher,
+                                            # prism-parser, prism-theoretician, prism-computer,
+                                            # prism-validator, prism-critic, prism-reporter,
+                                            # prism-librarian
+
+generated_at: <ISO-8601 UTC timestamp>      # e.g. 2026-04-16T14:23:07Z
+
+spec_task_id: <task id>                     # P1-T1, P1-T2, P1-T3, P1-T4, P1-T5, P2-T1, ...
+                                            # MUST match a task in phase_status.json
+
+depends_on:                                  # list of upstream artifact paths (relative to
+  - <path/to/upstream_artifact_1>           # working_dir/). Empty list [] if this is a
+  - <path/to/upstream_artifact_2>           # root-of-chain artifact (e.g. raw fetch).
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STRONGLY RECOMMENDED FIELDS
+# ─────────────────────────────────────────────────────────────────────────────
+
+spec_version: "1.0"                         # PRISM spec version this artifact conforms to
+artifact_type: <type>                       # raw_fetch | structured_data | derivation |
+                                            # prediction | validation | diagnostic |
+                                            # figure | fit_result | report
+content_sha256: <hex digest>                # SHA256 of the artifact body; for inline use,
+                                            # compute over the file EXCLUDING frontmatter
+provenance:
+  source_citation_key: <key>                # e.g. nist_handbook_mk00a, drake_swainson_1990
+                                            # must exist in knowledge_base/literature.yaml
+                                            # OR be "derived" for pipeline-internal products
+  source_url: <url-or-null>                 # only for raw_fetch artifacts
+  fetch_timestamp: <ISO-8601 UTC-or-null>   # only for raw_fetch artifacts
+  upstream_chain:                           # full provenance chain back to authoritative source
+    - <spec_task_id -> artifact_path>
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ARTIFACT-TYPE-SPECIFIC FIELDS
+# ─────────────────────────────────────────────────────────────────────────────
+
+# For predictions (CSV with required columns: system, n, l, j, quantity,
+#                  predicted_value, uncertainty, method):
+prediction_metadata:
+  model_id: <model>                         # rydberg_null | dirac_reduced | dirac_recoil |
+                                            # qed_standard | prism_<variant>
+  units:
+    energy: eV                              # canonical; use eV throughout pipeline
+    length: m
+  n_range: [<n_min>, <n_max>]
+  systems_included: [H_1s, H_2s, H_2p, ...] # explicit list
+  formula_symbolic: <latex-or-sympy-string> # the closed-form expression, if derivable
+  free_parameters_count: <int>              # for BIC ranking; 0 for pure theory predictions
+
+# For derivations (symbolic math artifacts):
+derivation_metadata:
+  starting_postulates: [<P1>, <P2>, ...]    # cite PRISM axiom numbers
+  introduced_postulates: []                 # MUST be empty list or program HALTS
+  one_step_per_turn: true                   # hard constraint from spec §5.D
+  choice_points:                            # flagged [[CHOICE: ...]] decisions
+    - step: <step_number>
+      alternatives: [<A>, <B>]
+      picked: <A>
+      justification: <text>
+  review_status: PENDING | ACCEPTED | REJECTED | REVISED
+
+# For validation (verdict artifacts):
+validation_metadata:
+  comparison_datasets: [<citation_key_1>, <citation_key_2>]
+  residual_tolerance_eV: 1.0e-8             # default; override per task
+  verdict: VALIDATED | PARTIAL | FALSIFIED | NULL_RESULT
+  max_fractional_deviation: <float>         # |predicted - measured| / measured, worst case
+  sigma_deviation: <float>                  # in units of combined experimental uncertainty
+  escalation_triggered: false               # true if >5σ disagreement
+
+# For fit results (PySR symbolic regression, BIC rankings):
+fit_metadata:
+  fitter: pysr | scipy_curve_fit | lmfit | sympy_manual
+  fitter_version: <version string>
+  r_squared: <float>
+  bic: <float>
+  aic: <float>
+  n_data_points: <int>
+  n_free_parameters: <int>
+  pareto_rank: <int>                        # PySR only; 1 = best on frontier
+  complexity_penalty: <float>               # PySR only
+  flagged_signatures: []                    # e.g. ["log(n)", "alpha^5"] if matched
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OPTIONAL FIELDS (context-specific)
+# ─────────────────────────────────────────────────────────────────────────────
+
+revision_history:                           # append-only; never rewrite past entries
+  - revision: 1
+    timestamp: <ISO-8601>
+    author: <agent_id>
+    note: initial generation
+  # - revision: 2
+  #   timestamp: ...
+  #   author: ...
+  #   note: corrected unit conversion error flagged by prism-validator
+
+reviewer_notes:                             # optional human-readable annotations
+  - <text>
+
+tokens_used: <int>                          # informational; populated by orchestrator
+wall_time_seconds: <float>                  # informational; populated by orchestrator
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EXAMPLES (reference only — not parsed)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Example A — inline frontmatter at top of derivations/P1-T3_s_state_integral.md:
+# ---
+# generated_by: prism-theoretician
+# generated_at: 2026-04-20T09:15:00Z
+# spec_task_id: P1-T3
+# depends_on:
+#   - derivations/P1-T2_ansatz.md
+#   - knowledge_base/literature_values.yaml
+# spec_version: "1.0"
+# artifact_type: derivation
+# derivation_metadata:
+#   starting_postulates: [PRISM-A1, PRISM-A3]
+#   introduced_postulates: []
+#   one_step_per_turn: true
+#   review_status: PENDING
+# ---
+# (markdown body follows here)
+#
+# Example B — sidecar predictions/P1-T4_hydrogen_predictions.csv.meta.yaml:
+# generated_by: prism-computer
+# generated_at: 2026-04-22T16:42:11Z
+# spec_task_id: P1-T4
+# depends_on:
+#   - derivations/P1-T3_s_state_integral.md
+# artifact_type: prediction
+# content_sha256: 3f9a2b...
+# prediction_metadata:
+#   model_id: prism_v5_log_spiral
+#   units: {energy: eV, length: m}
+#   n_range: [1, 5]
+#   systems_included: [H_1s, H_2s, H_2p_1/2, H_2p_3/2, H_3s, H_3p, H_3d]
+#   free_parameters_count: 0

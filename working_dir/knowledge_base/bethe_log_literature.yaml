@@ -1,0 +1,37 @@
+---
+generated_by: prism-librarian
+generated_at: 2026-04-17T00:00:00Z
+spec_task_id: bootstrap
+depends_on:
+  - knowledge_base/literature_values.yaml
+spec_version: "1.0"
+artifact_type: knowledge_base_extract
+provenance:
+  source_citation_key: drake_swainson_1990
+  upstream_chain:
+    - "bootstrap -> knowledge_base/literature_values.yaml#bethe_log_values"
+---
+
+# Bethe logarithm literature values — Drake & Swainson, Phys. Rev. A 41, 1243 (1990)
+# Target of P1-T5 (Phase 1 critical gate task).
+# Extracted from literature_values.yaml#bethe_log_values for direct file lookup.
+
+citation_key: drake_swainson_1990
+doi: 10.1103/PhysRevA.41.1243
+description: >
+  Dimensionless Bethe logarithms ln(k0/Z^2·Ry) for hydrogen s-states.
+  These are the theoretical coefficients the PRISM derivation must reproduce
+  (or fail against) in P1-T5.
+units: dimensionless
+
+values:
+  n_1: {value: 2.984128556, uncertainty: 1.0e-9}
+  n_2: {value: 2.811769893, uncertainty: 1.0e-9}
+  n_3: {value: 2.767663612, uncertainty: 1.0e-9}
+  n_4: {value: 2.749811840, uncertainty: 1.0e-9}
+  n_5: {value: 2.740823727, uncertainty: 1.0e-9}
+
+phase_0_finding: >
+  v4 pipeline result: qualitative PRISM prediction (s-states feel extra coupling
+  absent in Dirac-with-recoil) is CORRECT. Quantitative ansatz FAILED — wrong sign
+  and magnitude ~4.5x off. P1-T5 must reproduce the absolute values, not just the trend.

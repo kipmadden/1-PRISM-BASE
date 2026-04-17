@@ -1,0 +1,19 @@
+{
+  "name": "prism-base",
+  "version": "0.1.0",
+  "description": "PRISM Theory Validation Program — agentic orchestration of the hydrogen-spectrum 5D-spiral validation research across 7 phases and 9 agent roles. Implements prism_research_plan_v1.0.md.",
+  "author": {
+    "name": "Kip Madden",
+    "email": "kipmadden@cosapient.com"
+  },
+  "homepage": "https://github.com/kipmadden/prism-base",
+  "keywords": [
+    "physics",
+    "research",
+    "prism-theory",
+    "hydrogen-spectrum",
+    "lamb-shift",
+    "agentic-research"
+  ],
+  "license": "Proprietary"
+}

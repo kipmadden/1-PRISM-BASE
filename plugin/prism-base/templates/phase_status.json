@@ -1,0 +1,76 @@
+{
+  "phases": {
+    "0": {
+      "name": "Foundation",
+      "status": "COMPLETE",
+      "verdict": "PRE_COMPLETE",
+      "artifacts": ["prism_hydrogen_v4.py", "prism_research_summary.docx"],
+      "notes": "v4 finding: qualitative PRISM prediction confirmed (s-states feel extra coupling). Quantitative ansatz failed (wrong sign, 4.5x off Bethe log). Pipeline runs end-to-end on live NIST data."
+    },
+    "1": {
+      "name": "First-Principles Derivation",
+      "status": "PENDING",
+      "critical_path": true,
+      "tasks": {
+        "P1-T1": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
+        "P1-T2": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
+        "P1-T3": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
+        "P1-T4": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
+        "P1-T5": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": [], "gate": true}
+      }
+    },
+    "2": {
+      "name": "Muonic Hydrogen Cross-Check",
+      "status": "BLOCKED",
+      "blocked_by": "P1-T5 verdict required",
+      "tasks": {
+        "P2-T1": {"status": "PENDING", "verdict": null},
+        "P2-T2": {"status": "PENDING", "verdict": null},
+        "P2-T3": {"status": "PENDING", "verdict": null, "gate": true}
+      }
+    },
+    "3": {
+      "name": "Alpha Running Cross-Check",
+      "status": "BLOCKED",
+      "blocked_by": "P1-T5 verdict required",
+      "tasks": {
+        "P3-T1": {"status": "PENDING"},
+        "P3-T2": {"status": "PENDING"},
+        "P3-T3": {"status": "PENDING", "gate": true}
+      }
+    },
+    "4": {
+      "name": "Symbolic Regression Sanity Check",
+      "status": "BLOCKED",
+      "blocked_by": "P1-T5 verdict required",
+      "tasks": {
+        "P4-T1": {"status": "PENDING"},
+        "P4-T2": {"status": "PENDING"}
+      }
+    },
+    "5": {
+      "name": "Extended Dataset Robustness",
+      "status": "BLOCKED",
+      "blocked_by": "P1-T5 verdict required",
+      "tasks": {
+        "P5-T1": {"status": "PENDING"},
+        "P5-T2": {"status": "PENDING"},
+        "P5-T3": {"status": "PENDING"},
+        "P5-T4": {"status": "PENDING"},
+        "P5-T5": {"status": "PENDING", "gate": true}
+      }
+    },
+    "6": {
+      "name": "Synthesis and Publication",
+      "status": "BLOCKED",
+      "blocked_by": "Phases 1-5 completion",
+      "tasks": {
+        "P6-T1": {"status": "PENDING"},
+        "P6-T2": {"status": "PENDING", "human_in_the_loop": true},
+        "P6-T3": {"status": "PENDING"}
+      }
+    }
+  },
+  "overall_verdict": "PENDING",
+  "kill_criteria_active": false
+}

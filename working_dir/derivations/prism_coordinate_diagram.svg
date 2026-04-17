@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620"
+     font-family="Georgia, serif" font-size="13">
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#fafafa" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">
+    PRISM 5D Coordinate System and 4D Cartesian Projection
+  </text>
+  <text x="450" y="50" text-anchor="middle" font-size="11" fill="#555">
+    P1-T1 output — prism_coordinate_diagram.svg — DRAFT (pending CP1 flag resolution)
+  </text>
+
+  <!-- ============================================================ -->
+  <!-- LEFT PANEL: 5D spiral-native coordinate system               -->
+  <!-- ============================================================ -->
+
+  <text x="200" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">
+    5D Spiral-Native Coordinates (M5)
+  </text>
+
+  <!-- Axes origin -->
+  <circle cx="200" cy="340" r="3" fill="#333"/>
+
+  <!-- r-axis (radial, horizontal) -->
+  <line x1="80" y1="340" x2="360" y2="340" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="365" y="344" font-size="13" fill="#444">r</text>
+  <text x="345" y="360" font-size="10" fill="#666">radial (3D)</text>
+
+  <!-- θ-axis (spiral angle, arc annotation) -->
+  <path d="M 200 340 L 320 220" stroke="#444" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
+  <text x="330" y="215" font-size="13" fill="#444">θ</text>
+  <text x="310" y="230" font-size="10" fill="#666">spiral angle</text>
+
+  <!-- χ-axis (compact, vertical downward with double-head to indicate circularity) -->
+  <line x1="200" y1="340" x2="200" y2="480" stroke="#a04000" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="200,480 195,465 205,465" fill="#a04000"/>
+  <text x="215" y="490" font-size="13" fill="#a04000">χ</text>
+  <text x="215" y="504" font-size="10" fill="#a04000">compact dim.</text>
+  <text x="215" y="517" font-size="10" fill="#a04000">[0, L_χ)</text>
+
+  <!-- φ_az arc label -->
+  <path d="M 240 340 A 40 40 0 0 0 228 307" stroke="#2244aa" stroke-width="1.5" fill="none"/>
+  <text x="252" y="320" font-size="12" fill="#2244aa">φ_az</text>
+  <text x="250" y="333" font-size="10" fill="#2244aa">[0, 2π)</text>
+
+  <!-- φ_pol arc label -->
+  <path d="M 200 300 A 40 40 0 0 1 238 318" stroke="#117711" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <text x="242" y="302" font-size="12" fill="#117711">φ_pol</text>
+  <text x="242" y="314" font-size="10" fill="#117711">[0, π]</text>
+
+  <!-- Logarithmic spiral illustration -->
+  <!-- Spiral points computed manually for r0=1, k=0.15, theta 0..6pi -->
+  <polyline fill="none" stroke="#cc3300" stroke-width="2.5"
+    points="
+      200,340
+      207,331
+      215,323
+      224,318
+      233,316
+      242,317
+      250,322
+      256,329
+      259,338
+      258,348
+      253,357
+      244,363
+      233,365
+      221,362
+      211,355
+      204,344
+      200,332
+      200,320
+      204,308
+      213,299
+      225,295
+      238,296
+      250,303
+      258,314
+      262,328
+      260,342
+      252,355
+      239,362
+    "
+  />
+  <text x="270" y="375" font-size="11" fill="#cc3300">r(θ) = r₀ · e^(kθ)</text>
+  <text x="270" y="388" font-size="10" fill="#cc3300">logarithmic spiral</text>
+
+  <!-- Nucleus -->
+  <circle cx="200" cy="340" r="5" fill="#333" stroke="#000" stroke-width="1"/>
+  <text x="175" y="340" font-size="11" fill="#333">nucleus</text>
+
+  <!-- Compact dimension circle annotation -->
+  <ellipse cx="200" cy="480" rx="28" ry="10" fill="none" stroke="#a04000" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="200" y="536" text-anchor="middle" font-size="10" fill="#a04000">S¹ topology</text>
+
+  <!-- ============================================================ -->
+  <!-- CENTER: Projection arrow                                       -->
+  <!-- ============================================================ -->
+
+  <text x="450" y="290" text-anchor="middle" font-size="13" fill="#555">integrate</text>
+  <text x="450" y="305" text-anchor="middle" font-size="13" fill="#555">over χ</text>
+  <line x1="390" y1="320" x2="510" y2="320" stroke="#555" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="450" y="340" text-anchor="middle" font-size="11" fill="#555">Ψ_4D = ∫₀^{L_χ} Ψ_5D dχ</text>
+
+  <!-- Postulate label -->
+  <text x="450" y="360" text-anchor="middle" font-size="10" fill="#888">(Postulate P-5)</text>
+
+  <!-- ============================================================ -->
+  <!-- RIGHT PANEL: 4D Cartesian coordinates                        -->
+  <!-- ============================================================ -->
+
+  <text x="690" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">
+    4D Cartesian Projection
+  </text>
+
+  <!-- Axes origin right panel -->
+  <circle cx="680" cy="340" r="3" fill="#333"/>
+
+  <!-- x-axis -->
+  <line x1="680" y1="340" x2="820" y2="340" stroke="#2244aa" stroke-width="2" marker-end="url(#arrow3)"/>
+  <text x="825" y="344" font-size="13" fill="#2244aa">x</text>
+
+  <!-- y-axis -->
+  <line x1="680" y1="340" x2="580" y2="400" stroke="#2244aa" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow3)"/>
+  <text x="568" y="408" font-size="13" fill="#2244aa">y</text>
+
+  <!-- z-axis -->
+  <line x1="680" y1="340" x2="680" y2="200" stroke="#2244aa" stroke-width="2" marker-end="url(#arrow3)"/>
+  <text x="685" y="195" font-size="13" fill="#2244aa">z</text>
+
+  <!-- r label in 3D space -->
+  <line x1="680" y1="340" x2="760" y2="280" stroke="#880044" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <circle cx="760" cy="280" r="4" fill="#880044"/>
+  <text x="770" y="278" font-size="12" fill="#880044">r, φ_az, φ_pol</text>
+
+  <!-- Nucleus right panel -->
+  <circle cx="680" cy="340" r="5" fill="#333" stroke="#000" stroke-width="1"/>
+  <text x="655" y="340" font-size="11" fill="#333">nucleus</text>
+
+  <!-- Forward map equations -->
+  <rect x="555" y="420" width="270" height="100" fill="#fff" stroke="#bbb" stroke-width="1" rx="6"/>
+  <text x="690" y="440" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Forward Map</text>
+  <text x="565" y="458" font-size="11" fill="#222">x = r(θ) · sin(φ_pol) · cos(φ_az)</text>
+  <text x="565" y="473" font-size="11" fill="#222">y = r(θ) · sin(φ_pol) · sin(φ_az)</text>
+  <text x="565" y="488" font-size="11" fill="#222">z = r(θ) · cos(φ_pol)</text>
+  <text x="565" y="503" font-size="11" fill="#222">t = t  (time unchanged)</text>
+  <text x="565" y="516" font-size="11" fill="#666">r(θ) = r₀ · exp(k · θ)</text>
+
+  <!-- ============================================================ -->
+  <!-- BOTTOM: Key parameter box                                    -->
+  <!-- ============================================================ -->
+
+  <rect x="30" y="545" width="840" height="60" fill="#fffbe6" stroke="#cca800" stroke-width="1" rx="6"/>
+  <text x="450" y="563" text-anchor="middle" font-size="12" font-weight="bold" fill="#7a5000">
+    Key free parameters requiring resolution at CP1 (see prism_formal_spec.md flags)
+  </text>
+  <text x="450" y="580" text-anchor="middle" font-size="11" fill="#7a5000">
+    F2: L_χ = f(α) = ?    |    F3: k = g(α) = ?    |    F4: χ-θ coupling form = ?    |    F5: is k = α directly?
+  </text>
+  <text x="450" y="596" text-anchor="middle" font-size="10" fill="#999">
+    P1-T1 output — draft pending CP1 Kip Madden review — generated 2026-04-17
+  </text>
+
+  <!-- ============================================================ -->
+  <!-- Arrow markers                                                 -->
+  <!-- ============================================================ -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#444"/>
+    </marker>
+    <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#555"/>
+    </marker>
+    <marker id="arrow3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2244aa"/>
+    </marker>
+  </defs>
+
+</svg>

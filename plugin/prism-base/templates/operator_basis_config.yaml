@@ -1,0 +1,48 @@
+# Operator basis configuration for symbolic regression (P4-T1)
+# Restricts PySR to PRISM-native primitives rather than the general operator set.
+
+allowed_operators:
+  - "+"
+  - "-"
+  - "*"
+  - "/"
+  - "log"
+  - "sin"
+  - "cos"
+  - "exp"
+
+# Constants PySR can use in its discovered expressions
+allowed_constants:
+  - 1
+  - alpha    # fine-structure constant
+  - pi
+  - phi      # golden ratio
+  - n        # principal quantum number (variable, not constant; listed here as a named input)
+  - l        # orbital angular momentum
+  - j        # total angular momentum
+
+# PRISM geometric primitives — if PySR discovers one of these as a factor, flag as HIGH_INTEREST
+prism_signatures:
+  - "log(n)"            # scaling winding
+  - "1/n^3"             # standard s-state prefactor
+  - "alpha^5"           # Lamb-shift-scale coupling
+  - "sin(2*pi*log(n)/log(phi))"   # phi-modulation candidate
+  - "alpha/n"           # compactification-depth analog
+
+max_expression_complexity: 20
+max_depth: 8
+population_size: 50
+iterations: 40
+
+# Loss function — use MSE normalized by per-row uncertainty if available
+loss_function: weighted_mse
+
+# Pareto frontier output: at least 10 expressions along the complexity-loss frontier
+pareto_count: 10
+
+# Runtime ceiling
+max_wall_time_hours: 8
+
+# Julia / PySR version pinning — update when rerunning on new infra
+julia_version_required: ">=1.9"
+pysr_version_required: ">=0.18"

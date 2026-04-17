@@ -1,0 +1,200 @@
+# PRISM knowledge base — canonical literature values (spec Appendix A)
+#
+# Authoritative, citation-backed measurements and theoretical values used as
+# comparison targets throughout the validation program. This file is IMMUTABLE
+# in normal operation — updates require prism-librarian review and append-only
+# revision history.
+#
+# Unit convention (enforced pipeline-wide):
+#   - energies in eV
+#   - lengths in m (use fm for proton radii for human readability, but store SI too)
+#   - frequencies in Hz
+#   - alpha is dimensionless
+#
+# Every entry MUST include:
+#   value         — numerical value in canonical units
+#   uncertainty   — 1σ combined uncertainty in same units (null if dimensionless exact)
+#   units         — explicit string
+#   citation_key  — key into source_urls.yaml or a DOI
+#   notes         — optional human-readable context
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BETHE LOG VALUES — Drake & Swainson, Phys. Rev. A 41, 1243 (1990)
+# Target of P1-T5 (the Phase 1 critical gate task).
+# ─────────────────────────────────────────────────────────────────────────────
+
+bethe_log_values:
+  citation_key: drake_swainson_1990
+  doi: 10.1103/PhysRevA.41.1243
+  description: >
+    Dimensionless Bethe logarithms ln(k0/Z^2·Ry) for hydrogen s-states.
+    These are the theoretical coefficients the PRISM derivation must reproduce
+    (or fail against) in P1-T5.
+  units: dimensionless
+  values:
+    n_1: {value: 2.984128556, uncertainty: 1.0e-9}
+    n_2: {value: 2.811769893, uncertainty: 1.0e-9}
+    n_3: {value: 2.767663612, uncertainty: 1.0e-9}
+    n_4: {value: 2.749811840, uncertainty: 1.0e-9}
+    n_5: {value: 2.740823727, uncertainty: 1.0e-9}
+  notes: >
+    Phase 0 (v4) finding: qualitative PRISM prediction (s-states feel extra coupling
+    absent in Dirac-with-recoil) is CORRECT. Quantitative ansatz FAILED — wrong sign
+    and magnitude ~4.5× off. P1-T5 must reproduce the absolute values, not just the trend.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# HYDROGEN LAMB SHIFT — 2S_{1/2} - 2P_{1/2} splitting
+# ─────────────────────────────────────────────────────────────────────────────
+
+hydrogen_lamb_shift:
+  citation_key: lundeen_pipkin_1981
+  doi: 10.1103/PhysRevLett.46.232
+  description: Classic precision measurement of 2S-2P Lamb shift in hydrogen.
+  frequency:
+    value: 1057.845e6
+    uncertainty: 0.009e6
+    units: Hz
+  energy:
+    value: 4.37514e-6
+    uncertainty: 4.0e-11
+    units: eV
+  notes: Conversion via h·ν with CODATA 2022 h.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MUONIC HYDROGEN LAMB SHIFT — CREMA collaboration
+# Phase 2 target (cross-check under extreme mass/scale substitution).
+# ─────────────────────────────────────────────────────────────────────────────
+
+muonic_hydrogen_lamb_shift:
+  citation_key: antognini_2013
+  doi: 10.1126/science.1230016
+  description: >
+    2S_{1/2}^{F=1} → 2P_{3/2}^{F=2} transition in muonic hydrogen measured at PSI.
+    Combined with Pohl 2010 (doi 10.1038/nature09250).
+  frequency:
+    value: 49881.88e9
+    uncertainty: 0.76e9
+    units: Hz
+  energy:
+    value: 0.20635
+    uncertainty: 3.1e-6
+    units: eV
+  notes: >
+    Reduced-mass systematic is the dominant hazard in Phase 2 — the muon-to-electron
+    mass ratio (~207) rescales every Lamb-shift contribution by known QED factors.
+    Any PRISM signal must be disentangled from this standard rescaling.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PROTON CHARGE RADIUS — electronic vs muonic (the "proton radius puzzle")
+# ─────────────────────────────────────────────────────────────────────────────
+
+proton_radius_electronic:
+  citation_key: codata_2022
+  description: CODATA 2022 value from electronic hydrogen spectroscopy and ep scattering.
+  value: 0.8414e-15
+  uncertainty: 0.0019e-15
+  units: m
+  value_fm: 0.8414
+  uncertainty_fm: 0.0019
+  notes: >
+    Post-puzzle value after CODATA 2018/2022 reconciliation. Earlier electronic-only
+    values clustered near 0.877 fm — the famous 4% discrepancy with muonic measurements.
+
+proton_radius_muonic:
+  citation_key: antognini_2013
+  doi: 10.1126/science.1230016
+  description: Proton charge radius from muonic hydrogen Lamb shift (CREMA).
+  value: 0.84087e-15
+  uncertainty: 0.00039e-15
+  units: m
+  value_fm: 0.84087
+  uncertainty_fm: 0.00039
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FINE-STRUCTURE CONSTANT — running with energy scale
+# Phase 3 target (α(m_e) vs α(M_Z) cross-check).
+# ─────────────────────────────────────────────────────────────────────────────
+
+alpha_at_me:
+  citation_key: codata_2022
+  description: Low-energy (Thomson limit) fine-structure constant.
+  value_inverse: 137.035999177
+  uncertainty_inverse: 0.000000021
+  value: 7.2973525643e-3
+  uncertainty: 1.1e-12
+  units: dimensionless
+  notes: Reference scale Q = electron mass.
+
+alpha_at_mz:
+  citation_key: pdg_2024
+  description: >
+    Running α evaluated at the Z boson mass, from PDG electroweak review.
+    Uses on-shell OMS scheme; MS-bar value differs slightly.
+  value_inverse: 127.951
+  uncertainty_inverse: 0.009
+  value: 7.8155e-3
+  uncertainty: 5.5e-7
+  units: dimensionless
+  notes: >
+    ~7.4% fractional increase from α(m_e). If PRISM's log-spiral winding is the
+    driver of α's scale dependence, this span (m_e → M_Z ≈ 5 orders of magnitude
+    in Q) must be reproducible from geometry alone.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CODATA 2022 constants — canonical values pipeline-wide
+# ─────────────────────────────────────────────────────────────────────────────
+
+codata_2022_summary:
+  citation_key: codata_2022
+  rydberg_energy:
+    value: 13.605693122994
+    uncertainty: 2.6e-11
+    units: eV
+  rydberg_constant_cm_inverse:
+    value: 109737.31568157
+    uncertainty: 1.2e-8
+    units: cm^-1
+  electron_mass_eV:
+    value: 510998.95069
+    uncertainty: 1.5e-4
+    units: eV
+  muon_mass_eV:
+    value: 105658374.5
+    uncertainty: 2.4
+    units: eV
+  mu_to_e_mass_ratio:
+    value: 206.7682827
+    uncertainty: 4.6e-8
+    units: dimensionless
+  hbar_c_eV_fm:
+    value: 197.3269804
+    uncertainty: 0
+    units: eV·fm
+    notes: Exact after 2019 SI redefinition.
+  planck_h_eV_s:
+    value: 4.135667696e-15
+    uncertainty: 0
+    units: eV·s
+    notes: Exact after 2019 SI redefinition.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# GOLDEN RATIO and related PRISM-native constants
+# ─────────────────────────────────────────────────────────────────────────────
+
+prism_geometric_constants:
+  phi:
+    value: 1.6180339887498949
+    uncertainty: 0
+    units: dimensionless
+    definition: (1 + sqrt(5))/2
+    notes: Golden ratio; candidate for log-spiral pitch in PRISM ansatz.
+  log_phi:
+    value: 0.4812118250596035
+    uncertainty: 0
+    units: dimensionless
+    definition: ln(phi)
+  two_pi_over_log_phi:
+    value: 13.05704777
+    uncertainty: 0
+    units: dimensionless
+    notes: Frequency modulator in the sin(2π·log(n)/log(φ)) signature.

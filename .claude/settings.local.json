@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp plugin/prism-base/templates/current_state.json working_dir/current_state.json)",
+      "Bash(cp plugin/prism-base/templates/phase_status.json working_dir/phase_status.json)",
+      "Bash(cp plugin/prism-base/templates/source_urls.yaml working_dir/source_urls.yaml)",
+      "Bash(cp plugin/prism-base/templates/operator_basis_config.yaml working_dir/operator_basis_config.yaml)",
+      "Bash(cp plugin/prism-base/templates/handoff_contract_template.yaml working_dir/handoff_contract_template.yaml)"
+    ]
+  }
+}

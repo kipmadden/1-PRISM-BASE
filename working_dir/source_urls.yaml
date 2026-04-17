@@ -1,0 +1,95 @@
+# PRISM research program — external data source manifest
+# Every fetch task references one of these sources by id.
+
+nist_handbook_hydrogen_table5:
+  url: https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable5.htm
+  type: static_html
+  purpose: hydrogen fine-structure energy levels through n=5
+  used_by_tasks: [P1-T2, P1-T4]
+  citation_key: nist_handbook_mk00a
+  proxy_safe: true
+
+nist_handbook_hydrogen_table2:
+  url: https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable2.htm
+  type: static_html
+  purpose: hydrogen spectral lines (wavelengths)
+  used_by_tasks: [P5-T1]
+  proxy_safe: true
+
+nist_handbook_hydrogen_table3:
+  url: https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable3.htm
+  type: static_html
+  purpose: hydrogen Balmer/Lyman wavelengths
+  used_by_tasks: [P5-T1]
+  proxy_safe: true
+
+nist_handbook_deuterium:
+  url: https://physics.nist.gov/PhysRefData/Handbook/Tables/deuteriumtable5.htm
+  type: static_html
+  purpose: deuterium fine-structure levels (mass-scaling check)
+  used_by_tasks: [P5-T1]
+  proxy_safe: true
+
+nist_hdel_technote_1469:
+  url: https://physics.nist.gov/cuu/pdf/tn1469.pdf
+  type: static_pdf
+  purpose: Mohr & Kotochigova HDEL theoretical calculation reference
+  used_by_tasks: [P5-T2]
+  proxy_safe: true
+
+nist_hdel_cgi:
+  url: https://physics.nist.gov/cgi-bin/HDEL/hdel1.pl
+  type: cgi
+  purpose: high-n hydrogen levels (up to n=200)
+  used_by_tasks: [P5-T2]
+  proxy_safe: false
+  warning: "CGI endpoint commonly blocked by sandbox proxies. Try last; fall back to parsed table from tn1469.pdf if blocked."
+
+crema_muonic_h_antognini_2013:
+  doi: 10.1126/science.1230016
+  type: peer_reviewed_paper
+  purpose: muonic hydrogen Lamb shift measurement (CREMA)
+  used_by_tasks: [P2-T1]
+  citation_key: antognini_2013
+
+crema_muonic_h_pohl_2010:
+  doi: 10.1038/nature09250
+  type: peer_reviewed_paper
+  purpose: first muonic hydrogen proton radius measurement (CREMA)
+  used_by_tasks: [P2-T1]
+  citation_key: pohl_2010
+
+alpha_running_jegerlehner:
+  url: http://www-com.physik.hu-berlin.de/~fjeger/alphaQEDn.uu
+  type: data_table
+  purpose: compilation of alpha running with Q^2
+  used_by_tasks: [P3-T1]
+  citation_key: jegerlehner_2019
+
+pdg_electroweak_review:
+  url: https://pdg.lbl.gov/2024/reviews/rpp2024-rev-standard-model.pdf
+  type: static_pdf
+  purpose: PDG review of electroweak fits including alpha(M_Z)
+  used_by_tasks: [P3-T1]
+  citation_key: pdg_2024
+
+codata_2022:
+  url: https://physics.nist.gov/cuu/Constants/index.html
+  type: reference_data
+  purpose: fundamental constants
+  used_by_tasks: [all]
+  citation_key: codata_2022
+
+lundeen_pipkin_1981:
+  doi: 10.1103/PhysRevLett.46.232
+  type: peer_reviewed_paper
+  purpose: precision hydrogen Lamb shift measurement
+  used_by_tasks: [P1-T5]
+  citation_key: lundeen_pipkin_1981
+
+drake_swainson_1990:
+  doi: 10.1103/PhysRevA.41.1243
+  type: peer_reviewed_paper
+  purpose: Bethe log values for hydrogen
+  used_by_tasks: [P1-T5]
+  citation_key: drake_swainson_1990

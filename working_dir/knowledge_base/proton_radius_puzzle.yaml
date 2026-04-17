@@ -1,0 +1,49 @@
+---
+generated_by: prism-librarian
+generated_at: 2026-04-17T00:00:00Z
+spec_task_id: bootstrap
+depends_on:
+  - knowledge_base/literature_values.yaml
+spec_version: "1.0"
+artifact_type: knowledge_base_extract
+provenance:
+  source_citation_key: codata_2022
+  upstream_chain:
+    - "bootstrap -> knowledge_base/literature_values.yaml#proton_radius_electronic"
+    - "bootstrap -> knowledge_base/literature_values.yaml#proton_radius_muonic"
+---
+
+# Proton charge radius — electronic vs muonic ("proton radius puzzle")
+# Phase 2 cross-check target. Extracted from literature_values.yaml.
+
+proton_radius_electronic:
+  citation_key: codata_2022
+  description: CODATA 2022 value from electronic hydrogen spectroscopy and ep scattering.
+  value: 0.8414e-15
+  uncertainty: 0.0019e-15
+  units: m
+  value_fm: 0.8414
+  uncertainty_fm: 0.0019
+  notes: >
+    Post-puzzle value after CODATA 2018/2022 reconciliation. Earlier electronic-only
+    values clustered near 0.877 fm — the famous 4% discrepancy with muonic measurements.
+
+proton_radius_muonic:
+  citation_key: antognini_2013
+  doi: 10.1126/science.1230016
+  description: Proton charge radius from muonic hydrogen Lamb shift (CREMA).
+  value: 0.84087e-15
+  uncertainty: 0.00039e-15
+  units: m
+  value_fm: 0.84087
+  uncertainty_fm: 0.00039
+
+historical_discrepancy:
+  pre_2018_electronic_value_fm: 0.877
+  pre_2018_uncertainty_fm: 0.006
+  fractional_disagreement_pre_2018: 0.043
+  notes: >
+    The pre-2018 electronic measurements vs CREMA muonic measurement differed by
+    ~4%, corresponding to >5σ — the original "proton radius puzzle." CODATA 2018
+    and 2022 brought the electronic value down to agreement with muonic, but the
+    historical tension remains a Phase 2 / P2-T3 stress test for any new theory.
