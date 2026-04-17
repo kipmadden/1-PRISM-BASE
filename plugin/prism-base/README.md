@@ -75,6 +75,18 @@ conditions under which the hypothesis will be abandoned. That machinery is an
 archived with its provenance, so the trail of reasoning is auditable by any
 reader afterward, whether the outcome is positive or negative.
 
+<p align="center">
+  <img src="docs/figures/fig1_logspiral.svg"
+       alt="A logarithmic spiral r(θ) = r₀·exp(αθ) in the xy plane, with α identified as the ratio of angular velocity to radial scaling rate."
+       width="720"/>
+</p>
+
+<p align="center">
+  <em>Figure 1. The central PRISM claim: the electron bound-state worldline is a logarithmic
+  spiral whose growth rate is the fine-structure constant α itself. All quantum numbers and
+  the observed wavefunction are projections of this spiral into our 4D slice.</em>
+</p>
+
 ---
 
 ## 1. Current status
@@ -133,6 +145,19 @@ The framework is stated in six postulates:
   J = k · r₀³ · exp(3kθ) · sin(φ_pol), where φ_pol is the polar angle in the
   embedding.
 
+<p align="center">
+  <img src="docs/figures/fig2_compactification.svg"
+       alt="Schematic of a compactified fifth spacelike axis χ of circumference L_χ = 2π/α, with the electron worldline winding it as it evolves through 4D spacetime."
+       width="680"/>
+</p>
+
+<p align="center">
+  <em>Figure 2. Compactification of the χ axis (P-1) and the closure condition
+  L<sub>χ</sub> = 2π/α (P-5). The electron worldline winds the compact circle once per
+  revolution of the 4D spiral — tying the compactification length to α with no additional
+  parameter.</em>
+</p>
+
 ### 2.2 Derived consequences (not postulated)
 
 - The enhancement of self-energy-like corrections for ℓ = 0 states follows
@@ -145,6 +170,20 @@ The framework is stated in six postulates:
 - The Euler–Mascheroni constant γ is expected to appear in the regularization
   of the small-r integral, in a manner consistent with its appearance in the
   standard QED Bethe-log expression.
+
+<p align="center">
+  <img src="docs/figures/fig3_sstate_mechanism.svg"
+       alt="Radial probability densities of hydrogen 1s, 2p, and 3d states overlaid with the PRISM small-r coupling envelope. Only ℓ=0 (s-state) has nonzero amplitude in the small-r region; higher ℓ are excluded by the centrifugal barrier."
+       width="740"/>
+</p>
+
+<p align="center">
+  <em>Figure 3. Why hydrogen is the natural gate: the PRISM correction is concentrated at
+  small r, where only s-states (ℓ = 0) have non-vanishing amplitude. The centrifugal barrier
+  ℓ(ℓ+1)/r² pushes p, d, f, … states away from the coupling region. The Bethe logarithms of
+  Drake and Swainson (1990) — an s-state-dominated quantity known to ~10<sup>−6</sup> — are
+  therefore the cleanest available falsification target.</em>
+</p>
 
 ### 2.3 Explicit non-postulates
 
@@ -181,7 +220,49 @@ deviations of small magnitude may be scored PARTIAL pending critic review.
 
 The program is specified in `prism_research_plan_v1.0.md` and implemented
 through seventeen named roles, of which nine are realized as distinct AI
-subagents in this repository:
+subagents in this repository. The macro-level control flow, with its five
+human-in-the-loop checkpoints and two terminating outcomes, is:
+
+```mermaid
+flowchart TB
+    P0["<b>Phase 0</b><br/>Foundation<br/><i>v1–v4 prototypes</i><br/>✓ complete"]:::done
+    P1T1["<b>P1-T1</b><br/>Framework assembly"]:::active
+    CP1{{"cp1<br/>framework<br/>acceptance"}}:::gate
+    P1T3["<b>P1-T3</b><br/>Symbolic derivation<br/>of β(n,s)"]:::pending
+    CP2{{"cp2<br/>mid-course<br/>correction"}}:::gate
+    P1T4["<b>P1-T4</b><br/>Numerical evaluation"]:::pending
+    P1T5["<b>P1-T5</b><br/>Validate vs.<br/>Drake–Swainson 1990"]:::pending
+    CP3{{"cp3<br/>Phase 1<br/>verdict"}}:::gateCritical
+    P2["<b>Phase 2</b><br/>Relativistic spectrum<br/>(Lamb shift)"]:::pending
+    P3["<b>Phase 3</b><br/>α running"]:::pending
+    P5["<b>Phases 4–5</b><br/>Regression +<br/>cross-checks"]:::pending
+    CP4{{"cp4<br/>cross-check<br/>complete"}}:::gate
+    P6["<b>Phase 6</b><br/>Manuscript"]:::pending
+    CP5{{"cp5<br/>paper<br/>approval"}}:::gate
+    PUBpos["Publication<br/>(positive result)"]:::terminalPos
+    PUBneg["Publication<br/>(negative result,<br/>artifact trail)"]:::terminalNeg
+
+    P0 --> P1T1 --> CP1
+    CP1 -->|approve| P1T3 --> CP2 --> P1T4 --> P1T5 --> CP3
+    CP3 -->|VALIDATED / PARTIAL| P2 --> P3 --> P5 --> CP4 --> P6 --> CP5 --> PUBpos
+    CP3 -->|FALSIFIED<br/>(no single-postulate rescue)| PUBneg
+
+    classDef done fill:#c6f6d5,stroke:#2f855a,stroke-width:2px,color:#22543d
+    classDef active fill:#feebc8,stroke:#dd6b20,stroke-width:2px,color:#7b341e
+    classDef pending fill:#edf2f7,stroke:#a0aec0,stroke-width:1px,color:#4a5568
+    classDef gate fill:#e9d8fd,stroke:#6b46c1,stroke-width:1.5px,color:#44337a
+    classDef gateCritical fill:#fed7d7,stroke:#c53030,stroke-width:2.5px,color:#742a2a
+    classDef terminalPos fill:#bee3f8,stroke:#2b6cb0,stroke-width:2px,color:#2a4365
+    classDef terminalNeg fill:#fefcbf,stroke:#975a16,stroke-width:2px,color:#744210
+```
+
+<p align="center">
+  <em>Figure 4. Pre-registered program flow. cp3 is the only gate that can terminate the program
+  with a negative result; its falsification criteria are frozen in the specification before Phase 1
+  begins and cannot be softened during execution.</em>
+</p>
+
+### 3.1 Role assignments
 
 | role            | responsibility                                            |
 |-----------------|-----------------------------------------------------------|
@@ -195,7 +276,7 @@ subagents in this repository:
 | Reporter        | Composition of `final_report.docx` and manuscript draft   |
 | Librarian       | Enforcement of the handoff contract; artifact archival    |
 
-### 3.1 Human-in-the-loop checkpoints
+### 3.2 Human-in-the-loop checkpoints
 
 | id  | gate                                             | triggered after                      |
 |-----|--------------------------------------------------|--------------------------------------|
@@ -205,7 +286,7 @@ subagents in this repository:
 | cp4 | Cross-check validation complete                  | after Phases 2 and 3                 |
 | cp5 | Manuscript approval                              | before Phase 6 release               |
 
-### 3.2 Pre-committed kill criteria
+### 3.3 Pre-committed kill criteria
 
 The following conditions halt the program. They are fixed in the
 specification and cannot be softened during execution:
@@ -221,7 +302,7 @@ entry to `working_dir/escalations.md` and exits without advancing state. The
 orchestrator will not dispatch further tasks until a human renders a
 `/prism-checkpoint <id> reject` decision or annotates the escalation file.
 
-### 3.3 Handoff contract
+### 3.4 Handoff contract
 
 Every artifact carries metadata. Text artifacts (`.md`, `.tex`, `.yaml`) use
 inline YAML frontmatter; binary and tabular artifacts (`.csv`, `.json`,

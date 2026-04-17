@@ -45,7 +45,30 @@
             }
           }
         },
-        "P1-T2": {"status": "IN_PROGRESS", "verdict": null, "dispatched_at": "2026-04-17T00:00:00Z", "agent": "prism-theoretician", "completed_at": null, "outputs": []},
+        "P1-T2": {
+          "status": "IN_PROGRESS",
+          "verdict": null,
+          "dispatched_at": "2026-04-17T00:00:00Z",
+          "agent": "prism-theoretician",
+          "completed_at": null,
+          "current_step": 2,
+          "steps_completed": ["Step-1A", "Step-1B", "Step-1C", "Step-1D"],
+          "step_1_review": {
+            "reviewed_by": "Kip Madden",
+            "reviewed_at": "2026-04-17",
+            "verdict": "APPROVED",
+            "cp1_stands": true,
+            "cp2_stands": true,
+            "step_2_directive_captured": true,
+            "step_2_directive_summary": "State r↔χ coupling explicitly in plain prose at top of Step 2 before any calculation; then evaluate projection integral, identify Jacobian factor, fix N_lift symbolically"
+          },
+          "step_2_dispatched_at": "2026-04-17T00:03:01Z",
+          "step_2_directive_from_kip": "At the very top of the Step 2 derivation section, state explicitly that the r ↔ χ coupling — χ = θ(r) mod L_χ where r = r₀·exp(αθ), so χ is a function of r through the spiral parameterization — is what makes the δ-function couple r and χ variables. The projection integral ∫₀^L_χ dχ is NOT a trivial integral of a constant; the δ-function picks out the spiral track and the projected wavefunction has a Jacobian factor from the change of variable. State in plain prose first, then calculate.",
+          "outputs": [
+            "working_dir/derivations/P1-T2_wavefunction_lift.md",
+            "working_dir/derivations/P1-T2_wavefunction_lift.json"
+          ]
+        },
         "P1-T3": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
         "P1-T4": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
         "P1-T5": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": [], "gate": true}

@@ -2,10 +2,11 @@
   "spec_task_id": "P1-T2",
   "generated_by": "prism-theoretician",
   "generated_at": "2026-04-17T00:01:00Z",
+  "last_appended_at": "2026-04-17T00:04:00Z",
   "revision": 1,
-  "step": 1,
-  "steps_completed": ["Step-1A", "Step-1B", "Step-1C", "Step-1D"],
-  "steps_remaining": ["Step-2-evaluate-projection-integral", "Step-3-angular-momentum-quantization"],
+  "step": 2,
+  "steps_completed": ["Step-1A", "Step-1B", "Step-1C", "Step-1D", "Step-2"],
+  "steps_remaining": ["Step-3-angular-momentum-quantization"],
 
   "formulas": {
     "canonical_wavefunction": {
@@ -66,7 +67,7 @@
         "radial_spiral": "R_nl^(spiral)(theta(r)) — radial part in spiral coords",
         "angular": "Y_l^0(theta_pol) — standard spherical harmonic at m=0",
         "chi_localization": "delta(chi - theta(r) mod L_chi) — P-4 coupling",
-        "normalization": "N_lift — dimensionless constant, fixed in Step 2"
+        "normalization": "N_lift = 1 (exact; fixed in Step 2)"
       }
     },
 
@@ -85,17 +86,54 @@
     },
 
     "projection_operator": {
-      "description": "Operator P: L^2(M5) -> L^2(R^3) that recovers psi_nl from Psi_nl (Step 1D; un-evaluated)",
+      "description": "Operator P: L^2(M5) -> L^2(R^3) that recovers psi_nl from Psi_nl (Step 1D; evaluated in Step 2)",
       "latex": "(\\mathcal{P} \\cdot \\Psi_{n\\ell})(r, \\theta_{\\mathrm{pol}}) = \\int_0^{L_\\chi} \\Psi_{n\\ell}(r, \\theta_{\\mathrm{pol}}, \\varphi_{\\mathrm{az}}{=}0, \\chi) \\, d\\chi",
-      "note": "N_lift chosen so that P * Psi_nl = psi_nl exactly. Evaluation is Step 2.",
+      "result": "(P * Psi_nl)(r, theta_pol) = N_lift * R_nl(r) * Y_l^0(theta_pol)",
+      "note": "Chi-integral fires exactly once (delta function in [0, L_chi)). R_nl^(spiral)(theta(r)) = R_nl(r) by back-substitution. N_lift = 1.",
       "dimensional_check": "chi is dimensionless (radian); d(chi) is dimensionless; Psi_nl ~ [length]^{-3/2}; result ~ [length]^{-3/2} as required for psi_nl",
       "postulates_used": ["P-1", "P-6"]
     },
 
-    "projection_evaluation_preview": {
-      "description": "Anticipated result of Step 2 (delta function performs chi integral analytically)",
-      "latex": "\\int_0^{L_\\chi} N_{\\mathrm{lift}} \\, R_{n\\ell}^{(\\mathrm{spiral})}(\\theta(r)) \\, Y_{\\ell}^{0}(\\theta_{\\mathrm{pol}}) \\, \\delta(\\chi - \\theta(r) \\bmod L_\\chi) \\, d\\chi = N_{\\mathrm{lift}} \\, R_{n\\ell}^{(\\mathrm{spiral})}(\\theta(r)) \\, Y_{\\ell}^{0}(\\theta_{\\mathrm{pol}})",
-      "note": "The RHS equals R_nl(r) * Y_l^0 if R_nl^(spiral)(theta(r)) = R_nl(r_0 exp(alpha theta(r))) = R_nl(r) (which is true by construction), and N_lift = 1. This will be verified in Step 2."
+    "chi_integral_result": {
+      "description": "Result of the chi projection integral (Step 2.1)",
+      "latex": "\\int_0^{L_\\chi} \\delta\\!\\left(\\chi - \\theta(r) \\bmod L_\\chi\\right) d\\chi = 1",
+      "explanation": "Delta function argument theta(r) mod L_chi lies in [0, L_chi) by definition. Delta fires exactly once in the integration domain. Integral = 1.",
+      "step": "Step-2.1"
+    },
+
+    "jacobian_factor_coordinate_change": {
+      "description": "Jacobian factor from change of variable r <-> theta (Step 2.2). Enters P1-T3 energy integral.",
+      "latex": "\\frac{d\\theta}{dr} = \\frac{1}{\\alpha r}",
+      "derivation": "From r = r_0 exp(alpha theta), differentiating: dr = alpha r d(theta), so d(theta)/dr = 1/(alpha r)",
+      "significance": "This is the non-trivial factor produced by the r<->chi coupling. It appears in the 5D->4D measure conversion and in the Hamiltonian matrix element integral for Delta_E_nS in P1-T3.",
+      "step": "Step-2.2"
+    },
+
+    "measure_conversion_check": {
+      "description": "Verification that 5D spiral measure converts to standard 4D spherical measure (Step 2.2)",
+      "latex": "J(\\theta, \\theta_{\\mathrm{pol}}) \\, d\\theta = r^2 \\sin\\theta_{\\mathrm{pol}} \\, dr",
+      "derivation": "J d(theta) = alpha r_0^3 exp(3 alpha theta) sin(theta_pol) * dr/(alpha r) = r_0^3 exp(3 alpha theta)/r * sin(theta_pol) dr = r^3/r * sin(theta_pol) dr = r^2 sin(theta_pol) dr",
+      "step": "Step-2.2"
+    },
+
+    "N_lift": {
+      "description": "Normalization constant for the 5D wavefunction lift (Step 2.3 — FIXED)",
+      "value": 1,
+      "value_latex": "N_{\\mathrm{lift}} = 1",
+      "derivation": "Impose 4D projected normalization (P-6 consistent): integral d^3r |P*Psi_nl|^2 = N_lift^2 * [int R_nl^2 r^2 dr] * [int |Y_l^0|^2 sin(theta) dOmega] = N_lift^2 * 1 * 1 = 1. Therefore N_lift = 1.",
+      "dependence_on_n": false,
+      "dependence_on_l": false,
+      "dependence_on_alpha": false,
+      "normalization_convention": "4D projected norm: integral d^3r |(P*Psi_nl)(r, theta_pol)|^2 = 1",
+      "convention_justification": "P-6: 4D wavefunction is the physical observable; physical probabilities are 4D integrals. Direct 5D integration with delta^2 is distributional and requires a regulator that would introduce a free parameter (violating the no-new-parameter rule from P-1..P-6).",
+      "step": "Step-2.3"
+    },
+
+    "projected_wavefunction_final": {
+      "description": "Final form of the 4D-projected wavefunction after chi-integration (Step 2 output)",
+      "latex": "(\\mathcal{P} \\cdot \\Psi_{n\\ell})(r, \\theta_{\\mathrm{pol}}) = R_{n\\ell}(r) \\, Y_{\\ell}^{0}(\\theta_{\\mathrm{pol}}) = \\psi_{n\\ell}(r, \\theta_{\\mathrm{pol}})",
+      "note": "Exactly recovers the canonical hydrogen wavefunction. The lift and projection are norm-preserving. N_lift = 1.",
+      "step": "Step-2"
     }
   },
 
@@ -117,6 +155,15 @@
         "Gaussian of width sigma_chi: requires free parameter sigma_chi — violates no-new-parameter rule",
         "Flat 1/L_chi: incompatible with deterministic P-4 coupling"
       ]
+    },
+    {
+      "id": "CP-3",
+      "description": "Normalization convention: 4D projected norm vs. regulated 5D direct norm. Chose 4D projected norm (P-6 consistent; avoids distributional delta^2).",
+      "structural": false,
+      "decision": "4D projected norm: integral d^3r |(P*Psi_nl)|^2 = 1",
+      "affects_N_lift": true,
+      "affects_delta_e_ns_form": false,
+      "note": "Under either convention, the projected wavefunction equals psi_nl(r,theta_pol). N_lift = 1 under the 4D projected norm. Under a regulated 5D norm, N_lift would depend on the regulator but the projected wavefunction result is the same after the regulator is removed."
     }
   ],
 
@@ -131,23 +178,37 @@
     "check_in": "P1-T3 (when lifted Hamiltonian is written; if linearity fails to recover Schrodinger equation, that step will HALT)"
   },
 
+  "step_2_summary": {
+    "chi_integral": "1 (delta function fires once in [0, L_chi))",
+    "projected_wavefunction": "N_lift * R_nl(r) * Y_l^0(theta_pol) = psi_nl(r, theta_pol)",
+    "jacobian_factor": "d(theta)/dr = 1/(alpha * r)",
+    "measure_conversion": "J(theta, theta_pol) d(theta) = r^2 sin(theta_pol) dr [exact]",
+    "N_lift_value": 1,
+    "N_lift_dependence": "none (independent of n, l, alpha)",
+    "normalization_convention": "4D projected norm (P-6 consistent)",
+    "new_postulates": "NONE",
+    "golden_ratio_alert": "NOT triggered",
+    "structural_choice_points": "NONE",
+    "verdict": "STEP_COMPLETE_PENDING_REVIEW"
+  },
+
   "open_items_for_next_steps": [
-    {
-      "step": "Step-2",
-      "item": "Evaluate projection integral explicitly; fix N_lift; confirm R_nl^(spiral)(theta(r)) = R_nl(r)"
-    },
     {
       "step": "Step-3",
       "item": "Show angular momentum quantization (n, l integers) emerges from winding-count condition on compact chi dimension (spec §8 P1-T2 success criterion)"
     },
     {
       "step": "P1-T3",
-      "item": "Fix r_0 in terms of a_0 (non-structural; affects absolute normalization of N_lift but not n-dependence of Delta_E_nS)"
+      "item": "Fix r_0 in terms of a_0 (non-structural; affects absolute normalization but not n-dependence of Delta_E_nS)"
+    },
+    {
+      "step": "P1-T3",
+      "item": "Use Jacobian factor 1/(alpha r) in the Hamiltonian matrix element integral for Delta_E_nS. This is the load-bearing geometric factor from Step 2."
     }
   ],
 
   "verdict": "STEP_COMPLETE_PENDING_REVIEW",
   "halt_reason": null,
-  "review_required_before_step_2": true,
+  "review_required_before_step_3": true,
   "review_requested_from": "Kip Madden (principal; per spec §11 theoretician human-in-the-loop requirement)"
 }
