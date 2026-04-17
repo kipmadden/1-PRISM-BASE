@@ -64,6 +64,17 @@
           },
           "step_2_dispatched_at": "2026-04-17T00:03:01Z",
           "step_2_directive_from_kip": "At the very top of the Step 2 derivation section, state explicitly that the r ↔ χ coupling — χ = θ(r) mod L_χ where r = r₀·exp(αθ), so χ is a function of r through the spiral parameterization — is what makes the δ-function couple r and χ variables. The projection integral ∫₀^L_χ dχ is NOT a trivial integral of a constant; the δ-function picks out the spiral track and the projected wavefunction has a Jacobian factor from the change of variable. State in plain prose first, then calculate.",
+          "step_2_reviewed_by": "Kip Madden",
+          "step_2_reviewed_at": "2026-04-17",
+          "step_2_verdict": "APPROVED",
+          "step_2_results": {
+            "N_lift": 1,
+            "jacobian_factor": "dθ/dr = 1/(αr)",
+            "measure_conversion": "isometric (5D spiral → 4D spherical, exact)",
+            "CP_3": "non-structural (4D projected norm convention)"
+          },
+          "step_3_dispatched_at": "2026-04-17T00:05:01Z",
+          "current_step": 3,
           "outputs": [
             "working_dir/derivations/P1-T2_wavefunction_lift.md",
             "working_dir/derivations/P1-T2_wavefunction_lift.json"

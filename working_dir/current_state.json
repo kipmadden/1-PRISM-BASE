@@ -7,7 +7,7 @@
   "current_phase": 1,
   "current_phase_name": "First-Principles Derivation",
   "current_task": "P1-T2",
-  "current_task_status": "IN_PROGRESS_STEP_2",
+  "current_task_status": "IN_PROGRESS_STEP_3",
   "current_task_agent": "prism-theoretician",
   "current_task_revision": 1,
   "last_completed_task": "P1-T1",
@@ -34,6 +34,6 @@
     "librarian": "prism-librarian"
   },
   "active_escalations": [],
-  "step_directive_from_kip": "At the very top of the Step 2 derivation section, state explicitly that the r ↔ χ coupling — i.e. χ = θ(r) mod L_χ where r = r₀·exp(αθ), so χ is a function of r through the spiral parameterization — is what makes the δ-function in Ψ_nl = N_lift·R_nl^(spiral)(θ(r))·Y_l^0(θ_pol)·δ(χ − θ(r) mod L_χ) couple the r and χ variables. This means the projection integral ∫₀^L_χ dχ is NOT a trivial integral of a constant; the δ-function picks out the spiral track and the resulting projected wavefunction has a Jacobian factor from the change of variable. State this in plain prose first, then proceed to the calculation.",
-  "notes": "P1-T2 IN_PROGRESS Step 2. Step 1 approved by Kip 2026-04-17. Kip directive for Step 2 captured in step_directive_from_kip. Step 2: evaluate projection integral, identify Jacobian factor, fix N_lift symbolically. CP2 fires after P1-T3 (not here) unless Step 2 surfaces a structural fork. Halt after Step 2 for review before Step 3 dispatch."
+  "step_directive_from_kip": null,
+  "notes": "P1-T2 IN_PROGRESS Step 3. Steps 1 and 2 both approved by Kip Madden 2026-04-17. Step 2 results: N_lift=1 (exact), Jacobian dθ/dr=1/(αr), measure conversion isometric, CP-3 (normalization convention) non-structural. Step 3 dispatched: show quantization (n∈ℤ⁺, ℓ∈ℤ, n≥ℓ+1) emerges from winding-count topology via P-4+P-5. If Step 3 returns STEP_COMPLETE_AND_TASK_COMPLETE, P1-T2 closes and P1-T3 becomes next eligible task (not auto-dispatched)."
 }
