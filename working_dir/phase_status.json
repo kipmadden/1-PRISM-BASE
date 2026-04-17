@@ -54,12 +54,24 @@
           "pending_kip_review": true,
           "review_of": "Step 3 (quantization from winding topology)",
           "current_step": 3,
-          "steps_completed": ["Step-1A", "Step-1B", "Step-1C", "Step-1D", "Step-2", "Step-3"],
-          "step_1_review": {
-            "reviewed_by": "Kip Madden",
-            "reviewed_at": "2026-04-17",
-            "verdict": "APPROVED",
-            "cp1_stands": true,
-            "cp2_stands": true,
-            "step_2_directive_captured": true,
-            "step_2_directive_summary": "State r↔χ coupling explicitly in plain prose at top of Step 2 before any calculation; then evaluate projection integral, identify Jacobia
+          "steps_completed": ["Step-1A", "Step-1B", "Step-1C", "Step-1D", "Step-2", "Step-3"]
+        },
+        "P1-T3": {
+          "status": "IN_PROGRESS",
+          "title": "PRISM s-state correction — first-principles derivation",
+          "step_reviews": [
+            {
+              "reviewed_by": "Kip Madden",
+              "reviewed_at": "2026-04-17",
+              "verdict": "APPROVED",
+              "cp1_stands": true,
+              "cp2_stands": true,
+              "step_2_directive_captured": true,
+              "step_2_directive_summary": "State r↔χ coupling explicitly in plain prose at top of Step 2 before any calculation; then evaluate projection integral, identify Jacobian, name the physical length scale R_χ, and produce a single dimensionally-consistent finite expression for ΔE_nℓ"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
