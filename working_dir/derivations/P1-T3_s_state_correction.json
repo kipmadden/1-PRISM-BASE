@@ -1,0 +1,49 @@
+{
+  "task": "P1-T3",
+  "title": "PRISM s-state correction — first-principles derivation",
+  "spec_version": "1.0",
+  "status": "IN_PROGRESS",
+  "current_step": 1,
+  "binding_inputs": {
+    "postulates": ["P-1", "P-2", "P-3", "P-4", "P-5", "P-6"],
+    "wavefunction": "Psi_nl(r,theta_pol,phi_az,chi) = R_nl(r) * Y_l^0(theta_pol) * delta(chi - theta(r) mod L_chi)",
+    "N_lift": 1,
+    "Jacobian": "dtheta/dr = 1/(alpha*r)",
+    "L_chi": "2*pi/alpha",
+    "quantization": {"n": "Z+", "l": "Z>=0", "m": "Z, |m|<=l", "constraint": "n >= l+1"},
+    "H_0": "-hbar^2/(2*m_e) * Nabla_4D^2 + V(r)",
+    "V": "-e^2/(4*pi*eps_0*r)"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "5D Hamiltonian decomposition",
+      "accepted_at": "2026-04-17T00:00:00Z",
+      "accepted_by": "Kip Madden",
+      "acceptance_text": "named and justified",
+      "symbolic_form": {
+        "H_5D": "H_0 + H_chi",
+        "H_chi": "-hbar^2/(2*m_e) * d^2/dchi^2",
+        "Delta_E_nl": "<Psi_nl| H_chi |Psi_nl>",
+        "Delta_E_nl_integral": "-hbar^2/(2*m_e) * integral_d4x integral_0^L_chi dchi conj(Psi_nl) * d^2 Psi_nl / dchi^2",
+        "Delta_E_nS": "Delta_E_{n,l=0}"
+      },
+      "variables": {
+        "hbar": "reduced Planck constant",
+        "m_e": "electron mass",
+        "chi": "compact spacelike coordinate, period L_chi = 2*pi/alpha",
+        "r": "4D radial coordinate",
+        "n": "principal quantum number (= chi-winding number)",
+        "l": "orbital angular momentum quantum number"
+      },
+      "postulates_used": ["P-1", "P-6"],
+      "external_results_cited": ["Kaluza 1921", "Klein 1926", "standard KK kinetic decomposition"],
+      "new_postulates_introduced": [],
+      "choice_points": [],
+      "halts_triggered": [],
+      "output_for_next_step": "H_chi operator and integral expression (1.3); Step 2 will Fourier-expand delta(chi - theta(r) mod L_chi) on the chi-circle so the second derivative acts on smooth modes (Path-B from P1-T2 sec 3.5)."
+    }
+  ],
+  "tex_artifact": "working_dir/derivations/P1-T3_s_state_correction.tex",
+  "log_artifact": "working_dir/derivations/derivation_log.md"
+}

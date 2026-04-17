@@ -1,0 +1,88 @@
+% PRISM s-state correction derivation — P1-T3
+% Critical-path artifact for the entire research program.
+% One step per turn, human-reviewed, no new postulates beyond P-1..P-6.
+% No comparison to literature within this file; that lives in P1-T5.
+
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+
+\title{PRISM s-State Correction: First-Principles Derivation\\[2pt]
+       \large P1-T3 / Phase 1 Critical Path}
+\author{prism-theoretician (under human-in-the-loop review by Kip Madden)}
+\date{2026-04-17}
+
+\newcommand{\Hop}{\hat{H}}
+\newcommand{\Lchi}{L_\chi}
+\newcommand{\nw}{n_w}
+\newcommand{\me}{m_e}
+
+\begin{document}
+\maketitle
+
+\section*{Inputs (binding)}
+
+\begin{itemize}
+  \item Postulates P-1 through P-6, fixed by \texttt{prism\_formal\_spec.md} (revision 2, CP1-approved).
+  \item Lifted wavefunction $\Psi_{n\ell}(r,\theta_{\mathrm{pol}},\varphi_{\mathrm{az}},\chi)
+        = R_{n\ell}(r)\,Y_\ell^0(\theta_{\mathrm{pol}})\,\delta(\chi - \theta(r)\bmod \Lchi)$
+        from P1-T2, with $N_{\text{lift}}=1$, Jacobian $d\theta/dr = 1/(\alpha r)$,
+        $L_\chi = 2\pi/\alpha$, and quantization $n,\ell,m\in\mathbb{Z}$, $n\ge\ell+1$.
+  \item Standard hydrogen $\hat{H}_0 = -\frac{\hbar^2}{2\me}\nabla_{4\mathrm{D}}^{\,2} + V(r)$
+        with $V(r) = -e^2/(4\pi\varepsilon_0 r)$.
+\end{itemize}
+
+\section*{Step 1 --- 5D Hamiltonian decomposition}
+
+\paragraph{Goal.}
+Identify the operator whose expectation value on $\Psi_{n\ell}$ is the PRISM correction
+$\Delta E_{n\ell}$, and define $\Delta E_{nS} \equiv \Delta E_{n,0}$.
+
+\paragraph{Reasoning.}
+P-1 fixes a 5D space with one compact spacelike $\chi$. In flat 5D the kinetic operator
+on a separable coordinate splits cleanly into the 4D Laplacian plus the $\chi$-Laplacian:
+\begin{equation}
+  \nabla_{5\mathrm{D}}^{\,2} \;=\; \nabla_{4\mathrm{D}}^{\,2} \;+\; \frac{\partial^2}{\partial\chi^2}.
+  \tag{1.1}
+\end{equation}
+This is the standard Kaluza--Klein decomposition (Kaluza 1921; Klein 1926). The Coulomb potential
+$V(r)$ depends only on $r$ and commutes with this split. Postulate P-6 requires the 4D projection
+to recover canonical QM, so the 4D part of the 5D Hamiltonian must be exactly $\hat{H}_0$. The
+residual operator $\hat{H}_\chi$ is therefore the entire correction induced by the lift.
+
+\paragraph{Decomposition and definition.}
+\begin{equation}
+  \Hop_{5\mathrm{D}} \;=\;
+  \underbrace{-\frac{\hbar^2}{2\me}\nabla_{4\mathrm{D}}^{\,2} + V(r)}_{\Hop_0}
+  \;+\;
+  \underbrace{-\frac{\hbar^2}{2\me}\frac{\partial^2}{\partial\chi^2}}_{\Hop_\chi}
+  \tag{1.2}
+\end{equation}
+
+\begin{equation}
+  \Delta E_{n\ell} \;\equiv\;
+  \big\langle \Psi_{n\ell} \,\big|\, \Hop_\chi \,\big|\, \Psi_{n\ell} \big\rangle
+  \;=\;
+  -\frac{\hbar^2}{2\me}\!\int\! d^4x \!\int_0^{\Lchi}\! d\chi \;
+    \Psi_{n\ell}^{*} \,\frac{\partial^2 \Psi_{n\ell}}{\partial\chi^2}
+  \tag{1.3}
+\end{equation}
+
+\begin{equation}
+  \Delta E_{nS} \;\equiv\; \Delta E_{n,\ell=0}
+  \tag{1.4}
+\end{equation}
+
+\paragraph{Output for Step 2.}
+The operator $\Hop_\chi$ and the integral expression (1.3). The $\delta$-localized $\Psi_{n\ell}$
+makes $\partial^2/\partial\chi^2$ ill-defined as a pointwise object; Step 2 will re-express
+$\delta(\chi-\theta(r)\bmod \Lchi)$ as its Fourier series on the $\chi$-circle (the Path-B
+interpretation accepted in P1-T2 \S3.5) so the derivative is taken on smooth modes.
+
+\paragraph{Postulate accounting.} New postulates introduced this step: \textbf{none}.
+Postulates used: P-1, P-6. Standard QM theorems used: KK kinetic decomposition.
+\texttt{[[CHOICE]]} flags raised: \textbf{none}.
+
+\end{document}

@@ -1,0 +1,48 @@
+generated_by: prism-theoretician
+generated_at: 2026-04-17T00:00:00Z
+spec_task_id: P1-T3
+depends_on:
+  - working_dir/derivations/prism_formal_spec.md
+  - working_dir/derivations/P1-T2_wavefunction_lift.md
+  - working_dir/derivations/P1-T2_wavefunction_lift.json
+  - working_dir/kip_madden_prism_notes.md
+  - working_dir/knowledge_base/literature_values.yaml
+spec_version: "1.0"
+artifact_type: derivation
+provenance:
+  source_citation_key: derived
+  upstream_chain:
+    - "P1-T1 -> derivations/prism_formal_spec.md (rev 2, CP1 APPROVED)"
+    - "P1-T2 -> derivations/P1-T2_wavefunction_lift.md (Steps 1-3, TASK_COMPLETE)"
+
+derivation_metadata:
+  starting_postulates: [P-1, P-2, P-3, P-4, P-5, P-6]
+  introduced_postulates: []
+  one_step_per_turn: true
+  current_step: 1
+  steps_recorded: 1
+  choice_points: []
+  review_status: IN_PROGRESS
+  human_in_the_loop_reviewer: Kip Madden
+
+success_criteria_from_spec:
+  - "Integral expression for the s-state self-energy analog in the native spiral basis"
+  - "Integral is finite and well-defined (no renormalization handwaves)"
+  - "Explicit function of n with no free parameters beyond alpha"
+
+failure_modes_from_spec:
+  - integral_diverges
+  - expression_requires_tuning
+
+kill_criteria_active:
+  - "If derivation requires a NEW postulate beyond P-1..P-6 to make Delta_E_nS work, program HALTS at CP3 — per spec section 14 and Kip's notes section 7. No softening of FALSIFIED to PARTIAL on this basis."
+  - "If golden ratio phi appears in any step, HALT and flag — per F7 and Kip's notes section 3."
+
+revision_history:
+  - revision: 1
+    timestamp: 2026-04-17T00:00:00Z
+    author: prism-theoretician
+    note: Initial generation; Step 1 accepted by Kip Madden.
+
+reviewer_notes:
+  - "Step 1 acceptance text: 'named and justified' — confirming the goal name (5D Hamiltonian decomposition) and the justification chain (P-1 + KK decomposition + P-6 commute argument)."
