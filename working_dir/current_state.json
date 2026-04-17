@@ -7,7 +7,7 @@
   "current_phase": 1,
   "current_phase_name": "First-Principles Derivation",
   "current_task": "P1-T3",
-  "current_task_status": "READY_FOR_P1-T3_STEP_2",
+  "current_task_status": "STEP_2_ACCEPTED_READY_FOR_STEP_3",
   "current_task_agent": null,
   "current_task_revision": 1,
   "last_completed_task": "P1-T2",
@@ -35,5 +35,5 @@
   },
   "active_escalations": [],
   "step_directive_from_kip": null,
-  "notes": "P1-T2 closed clean. P1-T3 Step 1 ACCEPTed. Step 2 pending dispatch with Kip's REVISE directive; see P1-T3 pending_directive field."
+  "notes": "P1-T3 Step 2 ACCEPTed. ΔE_nℓ=ℏ²n²α²/(2m_e a₀²), r₀≡a₀. ℓ-independent; Step 3 applies P-6 Jacobian. Advance warning logged: ~10³× too large, wrong n-scaling; CP2 may fire before Step 3 completes."
 }

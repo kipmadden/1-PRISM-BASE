@@ -3,7 +3,7 @@
   "title": "PRISM s-state correction — first-principles derivation",
   "spec_version": "1.0",
   "status": "IN_PROGRESS",
-  "current_step": 1,
+  "current_step": 2,
   "binding_inputs": {
     "postulates": ["P-1", "P-2", "P-3", "P-4", "P-5", "P-6"],
     "wavefunction": "Psi_nl(r,theta_pol,phi_az,chi) = R_nl(r) * Y_l^0(theta_pol) * delta(chi - theta(r) mod L_chi)",
@@ -42,29 +42,50 @@
       "choice_points": [],
       "halts_triggered": [],
       "output_for_next_step": "H_chi operator and integral expression (1.3); Step 2 will Fourier-expand delta(chi - theta(r) mod L_chi) on the chi-circle so the second derivative acts on smooth modes (Path-B from P1-T2 sec 3.5)."
+    },
+    {
+      "step": 2,
+      "title": "Fourier regularization of χ-constraint, Jacobian derivation, and finite ΔE_nℓ",
+      "accepted_at": "2026-04-17T00:00:00Z",
+      "accepted_by": "Kip Madden",
+      "acceptance_text": "ACCEPT with CHOICE resolutions applied",
+      "symbolic_form": {
+        "eq_2_1_Jacobian": "dtheta/dr = 1/(alpha*r) [derived from r(theta)=a_0*exp(alpha*theta) via dr/dtheta=alpha*r]",
+        "eq_2_2_R_chi": "R_chi = L_chi/(2*pi) = a_0/alpha",
+        "eq_2_3_delta_Fourier": "delta(chi - theta(r) mod L_chi) = (1/L_chi) * sum_{k=-inf}^{inf} exp(2*pi*i*k*(chi - theta(r))/L_chi)",
+        "eq_2_4_chi_n": "chi_n(chi,r) = (1/sqrt(L_chi)) * exp(2*pi*i*n*(chi - theta(r))/L_chi)",
+        "eq_2_5_H_chi_eigenvalue": "H_chi * chi_n = (hbar^2*n^2)/(2*m_e*R_chi^2) * chi_n = (hbar^2*n^2*alpha^2)/(2*m_e*a_0^2) * chi_n",
+        "eq_2_6_Delta_E_nl": "Delta_E_nl = hbar^2*n^2*alpha^2/(2*m_e*a_0^2)"
+      },
+      "variables": {
+        "R_chi": "compactification radius = a_0/alpha = L_chi/(2*pi)",
+        "chi_n": "normalized chi-wavefunction for winding mode k=n, on chi-circle [0, L_chi)",
+        "r_0": "spiral inner scale, resolved as r_0 ≡ a_0 (Bohr radius) by parameter-parsimony (CHOICE 2)"
+      },
+      "postulates_used": ["P-2", "P-3", "P-4", "P-5"],
+      "external_results_cited": ["Klein 1926", "KK Fourier decomposition on compact circle"],
+      "new_postulates_introduced": [],
+      "choice_points": [
+        {
+          "id": "C1",
+          "description": "Fourier mode selection: keep k=n, discard k≠n harmonics.",
+          "resolution": "consequence of P1-T2 §3.3 topology-to-QN identification (n_winding = n_principal). r↔χ correlation is preserved at the phase level; density |χ_n|² is uniform in χ.",
+          "resolved_by": "Kip Madden",
+          "resolved_at": "2026-04-17"
+        },
+        {
+          "id": "C2",
+          "description": "Identification of spiral inner scale r₀.",
+          "resolution": "r₀ ≡ a₀ (Bohr radius) by parameter-parsimony. Record as derived identification, not new postulate. Reporter to tighten formal_spec §5 notation from 'related to a₀' to '≡ a₀'.",
+          "resolved_by": "Kip Madden",
+          "resolved_at": "2026-04-17"
+        }
+      ],
+      "halts_triggered": [],
+      "output_for_next_step": "Delta_E_nl = hbar^2*n^2*alpha^2/(2*m_e*a_0^2): finite, dimensionally consistent, no free parameters beyond alpha (with r_0≡a_0). Result is ℓ-independent at this order. Step 3 applies P-6 Jacobian weighting (J ∝ exp(3*alpha*theta)*sin(theta_pol)) to isolate ℓ=0 enhancement. Advance warning: ΔE_nℓ = n²·α²·Ry is ~10³× too large and has wrong n-scaling vs Bethe-log target. Step 3 P-6 Jacobian weighting must simultaneously (i) introduce ℓ-selectivity, (ii) reduce magnitude by ~α, (iii) reshape n² → roughly flat. If it does not, CP2 may fire before Step 3 completes."
     }
   ],
-  "pending_directive": {
-    "from": "Kip Madden",
-    "issued_at": "2026-04-17",
-    "type": "REVISE",
-    "applies_to": "Step 2",
-    "directive_text": "State r↔χ coupling explicitly in plain prose at top of Step 2 before any calculation; then evaluate projection integral, identify Jacobian, name the physical length scale R_χ, and produce a single dimensionally-consistent finite expression for ΔE_nℓ",
-    "issues": [
-      {
-        "id": "D1",
-        "description": "Dimensional inconsistency — the δ-function on χ has dimensions 1/length but the integral measure dχ expects a dimensionless integrand. Step 2 must either regularize δ→Fourier-mode sum (Path-B from P1-T2 §3.5) or prove the dimensions cancel before proceeding."
-      },
-      {
-        "id": "D2",
-        "description": "The Jacobian dθ/dr = 1/(αr) was stated but never derived from the embedding map. Step 2 must derive it explicitly from F4's log-spiral forward map and confirm it matches."
-      },
-      {
-        "id": "D3",
-        "description": "Name and define R_χ = L_χ/(2π) = 1/α as the compactification radius. All subsequent expressions should use R_χ so dimensional analysis is transparent."
-      }
-    ]
-  },
+  "pending_directive": null,
   "tex_artifact": "working_dir/derivations/P1-T3_s_state_correction.tex",
   "log_artifact": "working_dir/derivations/derivation_log.md"
 }

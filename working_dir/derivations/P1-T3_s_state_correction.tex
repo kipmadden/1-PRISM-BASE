@@ -85,4 +85,85 @@ interpretation accepted in P1-T2 \S3.5) so the derivative is taken on smooth mod
 Postulates used: P-1, P-6. Standard QM theorems used: KK kinetic decomposition.
 \texttt{[[CHOICE]]} flags raised: \textbf{none}.
 
+\section*{Step 2 --- Fourier regularization, Jacobian derivation, and finite $\Delta E_{n\ell}$}
+
+\paragraph{$r\leftrightarrow\chi$ coupling (plain prose).}
+$\chi$ is not an independent coordinate. Postulate P-4 sets $\chi = \theta \bmod \Lchi$, and P-2/P-3
+give $r = r_0 e^{\alpha\theta}$, so $\theta = (1/\alpha)\ln(r/r_0)$.  The 5D wavefunction $\Psi_{n\ell}$
+is therefore supported on the hypersurface $\{\chi = (1/\alpha)\ln(r/r_0)\bmod\Lchi\} \subset M5$:
+the electron occupies a spiral worldsheet in 5D, not the full 5D volume.
+
+\paragraph{D2 — Jacobian from the F4 embedding map (P-2, P-3).}
+\begin{equation}
+  r(\theta) = r_0\,e^{\alpha\theta}
+  \;\Longrightarrow\;
+  \frac{dr}{d\theta} = \alpha r
+  \;\Longrightarrow\;
+  \frac{d\theta}{dr} = \frac{1}{\alpha r}
+  \tag{2.1}
+\end{equation}
+This confirms and derives the stated input Jacobian from the explicit embedding map.
+
+\paragraph{D3 — Compactification radius.}
+\begin{equation}
+  R_\chi \;\equiv\; \frac{\Lchi}{2\pi} \;=\; \frac{r_0}{\alpha}
+  \tag{2.2}
+\end{equation}
+$R_\chi$ is the physical radius of the compact $\chi$-circle.
+With \textbf{CHOICE 2} resolved as $r_0 \equiv a_0$ (Bohr radius, by parameter-parsimony):
+$R_\chi = a_0/\alpha$.
+
+\paragraph{D1 — Fourier regularization of $\delta$-constraint (Path-B, Klein 1926).}
+On the $\chi$-circle of circumference $\Lchi = 2\pi R_\chi$:
+\begin{equation}
+  \delta\!\bigl(\chi - \theta(r)\bmod\Lchi\bigr)
+  \;=\; \frac{1}{\Lchi}\sum_{k=-\infty}^{\infty}
+        \exp\!\!\left(\frac{2\pi i k\,(\chi-\theta(r))}{\Lchi}\right)
+  \tag{2.3}
+\end{equation}
+Each mode is smooth and square-integrable on $[0,\Lchi)$; $\partial^2/\partial\chi^2$ acts
+mode-by-mode without distributional ambiguity.  Dimension of each term: $[\Lchi^{-1}]$, matching
+the $\delta$-function. \checkmark
+
+\paragraph{CHOICE 1 — mode selection $k=n$ (resolved by Kip Madden).}
+The principal quantum number $n$ is the $\chi$-winding number established in P1-T2 \S3.3
+(topology-to-QN identification: $n_{\mathrm{winding}} = n_{\mathrm{principal}}$).
+The physical $\chi$-state is therefore the $k=n$ Fourier mode:
+\begin{equation}
+  \chi_n(\chi,r) \;=\; \frac{1}{\sqrt{\Lchi}}\,
+    \exp\!\!\left(\frac{2\pi i n\,(\chi-\theta(r))}{\Lchi}\right)
+  \tag{2.4}
+\end{equation}
+$r\leftrightarrow\chi$ correlation is preserved at the phase level; density
+$|\chi_n|^2 = 1/\Lchi$ is uniform in $\chi$. Modes $k\ne n$ are off-shell and discarded.
+
+\paragraph{$\hat{H}_\chi$ eigenvalue and result.}
+\begin{equation}
+  \hat{H}_\chi\,\chi_n
+  \;=\; \frac{\hbar^2}{2\me}\!\left(\frac{2\pi n}{\Lchi}\right)^{\!2}\!\chi_n
+  \;=\; \frac{\hbar^2 n^2}{2\me R_\chi^2}\,\chi_n
+  \;=\; \frac{\hbar^2 n^2\alpha^2}{2\me a_0^2}\,\chi_n
+  \tag{2.5}
+\end{equation}
+The $\chi$- and spatial normalizations each contribute unity, giving:
+\begin{equation}
+  \boxed{\Delta E_{n\ell}
+  \;=\; \frac{\hbar^2 n^2\alpha^2}{2\me a_0^2}}
+  \tag{2.6}
+\end{equation}
+Dimensions: $[\hbar^2/(m_e\,a_0^2)] = \mathrm{energy}$. \checkmark\quad
+Finite: Fourier truncation to $k=n$ replaces the divergent $\sum_k k^2$ with a single term. \checkmark\quad
+Free parameters beyond $\alpha$: \textbf{none} (with $r_0\equiv a_0$ by CHOICE 2). \checkmark
+
+\paragraph{Note: $\ell$-independence.}
+$\Delta E_{n\ell}$ is $\ell$-independent at this order.
+The s-state selectivity requires the P-6 Jacobian weighting
+$J\propto e^{3\alpha\theta}\sin\theta_{\mathrm{pol}}$ (Step 3).
+
+\paragraph{Postulate accounting.}
+New postulates introduced: \textbf{none}.
+Postulates used: P-2, P-3, P-4, P-5.
+External: KK Fourier decomposition (Klein 1926).
+\texttt{[[CHOICE]]} flags raised and resolved: 2 (C1 mode selection, C2 $r_0\equiv a_0$).
+
 \end{document}
