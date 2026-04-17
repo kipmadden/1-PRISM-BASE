@@ -1,0 +1,153 @@
+{
+  "spec_task_id": "P1-T2",
+  "generated_by": "prism-theoretician",
+  "generated_at": "2026-04-17T00:01:00Z",
+  "revision": 1,
+  "step": 1,
+  "steps_completed": ["Step-1A", "Step-1B", "Step-1C", "Step-1D"],
+  "steps_remaining": ["Step-2-evaluate-projection-integral", "Step-3-angular-momentum-quantization"],
+
+  "formulas": {
+    "canonical_wavefunction": {
+      "description": "Standard hydrogen wavefunction in spherical coordinates (m=0 restriction applied; see choice_points CP-1)",
+      "latex": "\\psi_{n\\ell}(r, \\theta_{\\mathrm{pol}}) = R_{n\\ell}(r) \\, Y_{\\ell}^{0}(\\theta_{\\mathrm{pol}})",
+      "source": "Griffiths, Introduction to Quantum Mechanics, 3rd ed., eq. 4.73 (Cambridge 2018)"
+    },
+
+    "radial_wavefunction_explicit": {
+      "description": "Normalized radial eigenfunction for hydrogen (principal quantum number n, angular momentum quantum number l)",
+      "latex": "R_{n\\ell}(r) = \\sqrt{\\left(\\frac{2}{n a_0}\\right)^3 \\frac{(n-\\ell-1)!}{2n\\,[(n+\\ell)!]^3}} \\, e^{-r/(n a_0)} \\left(\\frac{2r}{n a_0}\\right)^\\ell L_{n-\\ell-1}^{2\\ell+1}\\!\\left(\\frac{2r}{n a_0}\\right)",
+      "normalization": "\\int_0^\\infty [R_{n\\ell}(r)]^2 r^2 \\, dr = 1",
+      "source": "Griffiths eq. 4.73; Bethe & Salpeter §2"
+    },
+
+    "spherical_harmonic_m0": {
+      "description": "Spherical harmonic at m=0",
+      "latex": "Y_{\\ell}^{0}(\\theta_{\\mathrm{pol}}) = \\sqrt{\\frac{2\\ell+1}{4\\pi}} \\, P_{\\ell}(\\cos\\theta_{\\mathrm{pol}})",
+      "note": "P_l is the Legendre polynomial of degree l"
+    },
+
+    "spiral_parameter_from_r": {
+      "description": "Spiral parameter theta as function of radial coordinate r (from P-2, P-3, prism_formal_spec.md §4.2)",
+      "latex": "\\theta(r) = \\frac{1}{\\alpha} \\ln\\!\\left(\\frac{r}{r_0}\\right)",
+      "postulates_used": ["P-2", "P-3"],
+      "notes": "Defined for all r > 0; theta -> -infinity as r -> 0 (inner winding); theta -> +infinity as r -> infinity"
+    },
+
+    "r_from_spiral_parameter": {
+      "description": "Radial coordinate as function of spiral parameter (forward embedding map, P-2, P-3)",
+      "latex": "r(\\theta) = r_0 \\, e^{\\alpha \\theta}",
+      "postulates_used": ["P-2", "P-3"]
+    },
+
+    "radial_in_spiral_coords": {
+      "description": "Radial wavefunction expressed in spiral parameter theta (substituting r = r_0 exp(alpha theta))",
+      "latex": "R_{n\\ell}^{(\\mathrm{spiral})}(\\theta) = C_{n\\ell} \\, e^{\\alpha \\ell \\theta} \\, \\exp\\!\\left(-\\frac{r_0 e^{\\alpha\\theta}}{n a_0}\\right) L_{n-\\ell-1}^{2\\ell+1}\\!\\left(\\frac{2 r_0 e^{\\alpha\\theta}}{n a_0}\\right)",
+      "normalization_prefactor": {
+        "description": "C_nl collects the numerical prefactor after substituting r = r_0 exp(alpha theta)",
+        "latex": "C_{n\\ell} = \\sqrt{\\left(\\frac{2}{n a_0}\\right)^3 \\frac{(n-\\ell-1)!}{2n\\,[(n+\\ell)!]^3}} \\left(\\frac{2r_0}{n a_0}\\right)^\\ell r_0^\\ell"
+      },
+      "postulates_used": ["P-2", "P-3"],
+      "note": "r_0 (spiral reference radius) is not yet fixed by P-1..P-6; it scales normalization but not n-dependence. Will be set in P1-T4."
+    },
+
+    "chi_coupling_factor": {
+      "description": "Chi-coupling factor f(chi, theta) implementing P-4 (chi = theta mod L_chi); see choice_points CP-2",
+      "latex": "f(\\chi, \\theta) = \\delta\\!\\left(\\chi - \\theta \\bmod L_\\chi\\right)",
+      "postulates_used": ["P-4", "P-5"],
+      "justification": "P-4 is a deterministic map; unique probability density implementing it without free parameters is the delta function"
+    },
+
+    "lifted_wavefunction_5D": {
+      "description": "5D wavefunction on M5 (PRISM lift of psi_nl; Step 1C output)",
+      "latex": "\\Psi_{n\\ell}(r, \\theta_{\\mathrm{pol}}, \\varphi_{\\mathrm{az}}, \\chi) = N_{\\mathrm{lift}} \\, R_{n\\ell}^{(\\mathrm{spiral})}(\\theta(r)) \\, Y_{\\ell}^{0}(\\theta_{\\mathrm{pol}}) \\, \\delta\\!\\left(\\chi - \\theta(r) \\bmod L_\\chi\\right)",
+      "postulates_used": ["P-1", "P-2", "P-3", "P-4", "P-5", "P-6"],
+      "components": {
+        "radial_spiral": "R_nl^(spiral)(theta(r)) — radial part in spiral coords",
+        "angular": "Y_l^0(theta_pol) — standard spherical harmonic at m=0",
+        "chi_localization": "delta(chi - theta(r) mod L_chi) — P-4 coupling",
+        "normalization": "N_lift — dimensionless constant, fixed in Step 2"
+      }
+    },
+
+    "jacobian_from_formal_spec": {
+      "description": "Jacobian of 5D embedding map (from P-6 and prism_formal_spec.md §4.2, derived from P-2, P-3, P-4)",
+      "latex": "J(\\theta, \\theta_{\\mathrm{pol}}) = \\alpha \\, r_0^3 \\, e^{3\\alpha\\theta} \\, \\sin\\theta_{\\mathrm{pol}}",
+      "postulates_used": ["P-2", "P-3", "P-4", "P-6"],
+      "note": "The exp(3 alpha theta) factor concentrates at small r (theta -> -inf) and drives s-state enhancement for P1-T3"
+    },
+
+    "compactification_length": {
+      "description": "Circumference of compact chi dimension (P-5, derived from closure condition P-2+P-3+P-4)",
+      "latex": "L_\\chi = \\frac{2\\pi}{\\alpha}",
+      "value_numeric": "860.9... (dimensionless, in radians; alpha = 1/137.036...)",
+      "postulates_used": ["P-2", "P-3", "P-4", "P-5"]
+    },
+
+    "projection_operator": {
+      "description": "Operator P: L^2(M5) -> L^2(R^3) that recovers psi_nl from Psi_nl (Step 1D; un-evaluated)",
+      "latex": "(\\mathcal{P} \\cdot \\Psi_{n\\ell})(r, \\theta_{\\mathrm{pol}}) = \\int_0^{L_\\chi} \\Psi_{n\\ell}(r, \\theta_{\\mathrm{pol}}, \\varphi_{\\mathrm{az}}{=}0, \\chi) \\, d\\chi",
+      "note": "N_lift chosen so that P * Psi_nl = psi_nl exactly. Evaluation is Step 2.",
+      "dimensional_check": "chi is dimensionless (radian); d(chi) is dimensionless; Psi_nl ~ [length]^{-3/2}; result ~ [length]^{-3/2} as required for psi_nl",
+      "postulates_used": ["P-1", "P-6"]
+    },
+
+    "projection_evaluation_preview": {
+      "description": "Anticipated result of Step 2 (delta function performs chi integral analytically)",
+      "latex": "\\int_0^{L_\\chi} N_{\\mathrm{lift}} \\, R_{n\\ell}^{(\\mathrm{spiral})}(\\theta(r)) \\, Y_{\\ell}^{0}(\\theta_{\\mathrm{pol}}) \\, \\delta(\\chi - \\theta(r) \\bmod L_\\chi) \\, d\\chi = N_{\\mathrm{lift}} \\, R_{n\\ell}^{(\\mathrm{spiral})}(\\theta(r)) \\, Y_{\\ell}^{0}(\\theta_{\\mathrm{pol}})",
+      "note": "The RHS equals R_nl(r) * Y_l^0 if R_nl^(spiral)(theta(r)) = R_nl(r_0 exp(alpha theta(r))) = R_nl(r) (which is true by construction), and N_lift = 1. This will be verified in Step 2."
+    }
+  },
+
+  "choice_points": [
+    {
+      "id": "CP-1",
+      "description": "m=0 restriction: work at magnetic quantum number m=0 because the chi-integral and J are azimuthally symmetric under P-2 (planar spiral). Matrix element for Delta_E_nS is same for all m at fixed (n,l).",
+      "structural": false,
+      "decision": "m=0; degeneracy factor (2l+1) recorded separately",
+      "affects_delta_e_ns_form": false
+    },
+    {
+      "id": "CP-2",
+      "description": "Delta-function localization: f(chi, theta) = delta(chi - theta mod L_chi) is the unique choice consistent with P-4 that introduces no free parameter.",
+      "structural": false,
+      "decision": "delta(chi - theta(r) mod L_chi)",
+      "affects_delta_e_ns_form": false,
+      "alternatives_rejected": [
+        "Gaussian of width sigma_chi: requires free parameter sigma_chi — violates no-new-parameter rule",
+        "Flat 1/L_chi: incompatible with deterministic P-4 coupling"
+      ]
+    }
+  ],
+
+  "introduced_postulates": [],
+
+  "golden_ratio_alert": null,
+
+  "t_theta_assumption": {
+    "assumed": "t proportional to theta (linear; non-relativistic Schrodinger limit)",
+    "status": "documented assumed limit; not derived from P-1..P-6",
+    "reference": "kip_madden_prism_notes.md §6; prism_formal_spec.md §10.3 item 1",
+    "check_in": "P1-T3 (when lifted Hamiltonian is written; if linearity fails to recover Schrodinger equation, that step will HALT)"
+  },
+
+  "open_items_for_next_steps": [
+    {
+      "step": "Step-2",
+      "item": "Evaluate projection integral explicitly; fix N_lift; confirm R_nl^(spiral)(theta(r)) = R_nl(r)"
+    },
+    {
+      "step": "Step-3",
+      "item": "Show angular momentum quantization (n, l integers) emerges from winding-count condition on compact chi dimension (spec §8 P1-T2 success criterion)"
+    },
+    {
+      "step": "P1-T3",
+      "item": "Fix r_0 in terms of a_0 (non-structural; affects absolute normalization of N_lift but not n-dependence of Delta_E_nS)"
+    }
+  ],
+
+  "verdict": "STEP_COMPLETE_PENDING_REVIEW",
+  "halt_reason": null,
+  "review_required_before_step_2": true,
+  "review_requested_from": "Kip Madden (principal; per spec §11 theoretician human-in-the-loop requirement)"
+}

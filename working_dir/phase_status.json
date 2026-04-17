@@ -45,7 +45,7 @@
             }
           }
         },
-        "P1-T2": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
+        "P1-T2": {"status": "IN_PROGRESS", "verdict": null, "dispatched_at": "2026-04-17T00:00:00Z", "agent": "prism-theoretician", "completed_at": null, "outputs": []},
         "P1-T3": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
         "P1-T4": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": []},
         "P1-T5": {"status": "PENDING", "verdict": null, "completed_at": null, "outputs": [], "gate": true}

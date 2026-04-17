@@ -7,9 +7,9 @@
   "current_phase": 1,
   "current_phase_name": "First-Principles Derivation",
   "current_task": "P1-T2",
-  "current_task_status": "PENDING",
+  "current_task_status": "IN_PROGRESS",
   "current_task_agent": "prism-theoretician",
-  "current_task_revision": null,
+  "current_task_revision": 1,
   "last_completed_task": "P1-T1",
   "last_completed_at": "2026-04-17T00:00:00Z",
   "last_completed_verdict": "APPROVED_AT_CP1",
@@ -34,5 +34,5 @@
     "librarian": "prism-librarian"
   },
   "active_escalations": [],
-  "notes": "CP1 APPROVED by Kip Madden 2026-04-17. P1-T1 revision 2 (prism_formal_spec.md) is the binding framework. P1-T2 ready to dispatch — wavefunction lift from canonical hydrogen ψ_nℓ(r,θ_pol,φ) to 5D via P-1..P-6 embedding. Run /prism-next to dispatch."
+  "notes": "P1-T2 IN_PROGRESS. Dispatched 2026-04-17 to prism-theoretician. Wavefunction lift: canonical ψ_nℓ → 5D Ψ_nℓ(r,θ_pol,φ_az,χ) via P-1..P-6. Outputs expected: working_dir/derivations/P1-T2_wavefunction_lift.md and P1-T2_wavefunction_lift.json. CP2 fires after P1-T3 completes, not here."
 }
