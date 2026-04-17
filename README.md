@@ -246,7 +246,7 @@ flowchart TB
     P0 --> P1T1 --> CP1
     CP1 -->|approve| P1T3 --> CP2 --> P1T4 --> P1T5 --> CP3
     CP3 -->|VALIDATED / PARTIAL| P2 --> P3 --> P5 --> CP4 --> P6 --> CP5 --> PUBpos
-    CP3 -->|FALSIFIED<br/>(no single-postulate rescue)| PUBneg
+    CP3 -->|"FALSIFIED<br/>(no single-postulate rescue)"| PUBneg
 
     classDef done fill:#c6f6d5,stroke:#2f855a,stroke-width:2px,color:#22543d
     classDef active fill:#feebc8,stroke:#dd6b20,stroke-width:2px,color:#7b341e
