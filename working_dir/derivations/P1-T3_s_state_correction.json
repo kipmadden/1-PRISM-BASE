@@ -3,7 +3,7 @@
   "title": "PRISM s-state correction — first-principles derivation",
   "spec_version": "1.0",
   "status": "IN_PROGRESS",
-  "current_step": 2,
+  "current_step": 3,
   "binding_inputs": {
     "postulates": ["P-1", "P-2", "P-3", "P-4", "P-5", "P-6"],
     "wavefunction": "Psi_nl(r,theta_pol,phi_az,chi) = R_nl(r) * Y_l^0(theta_pol) * delta(chi - theta(r) mod L_chi)",
@@ -55,7 +55,11 @@
         "eq_2_3_delta_Fourier": "delta(chi - theta(r) mod L_chi) = (1/L_chi) * sum_{k=-inf}^{inf} exp(2*pi*i*k*(chi - theta(r))/L_chi)",
         "eq_2_4_chi_n": "chi_n(chi,r) = (1/sqrt(L_chi)) * exp(2*pi*i*n*(chi - theta(r))/L_chi)",
         "eq_2_5_H_chi_eigenvalue": "H_chi * chi_n = (hbar^2*n^2)/(2*m_e*R_chi^2) * chi_n = (hbar^2*n^2*alpha^2)/(2*m_e*a_0^2) * chi_n",
-        "eq_2_6_Delta_E_nl": "Delta_E_nl = hbar^2*n^2*alpha^2/(2*m_e*a_0^2)"
+        "eq_2_6_Delta_E_nl": {
+          "formula": "Delta_E_nl = hbar^2*n^2*alpha^2/(2*m_e*a_0^2)",
+          "superseded_by_step_3": true,
+          "note": "Step 2 eigenvalue is free-KK rest energy on unconstrained wavefunction; physical PRISM ΔE_nℓ is Path-A constrained pullback, evaluated in Step 3."
+        }
       },
       "variables": {
         "R_chi": "compactification radius = a_0/alpha = L_chi/(2*pi)",
@@ -82,10 +86,80 @@
         }
       ],
       "halts_triggered": [],
-      "output_for_next_step": "Delta_E_nl = hbar^2*n^2*alpha^2/(2*m_e*a_0^2): finite, dimensionally consistent, no free parameters beyond alpha (with r_0≡a_0). Result is ℓ-independent at this order. Step 3 applies P-6 Jacobian weighting (J ∝ exp(3*alpha*theta)*sin(theta_pol)) to isolate ℓ=0 enhancement. Advance warning: ΔE_nℓ = n²·α²·Ry is ~10³× too large and has wrong n-scaling vs Bethe-log target. Step 3 P-6 Jacobian weighting must simultaneously (i) introduce ℓ-selectivity, (ii) reduce magnitude by ~α, (iii) reshape n² → roughly flat. If it does not, CP2 may fire before Step 3 completes."
+      "output_for_next_step": "Delta_E_nl = hbar^2*n^2*alpha^2/(2*m_e*a_0^2): finite, dimensionally consistent, no free parameters beyond alpha (with r_0≡a_0). Result is ℓ-independent at this order. SUPERSEDED: see eq_2_6_Delta_E_nl.superseded_by_step_3. Step 3 applies Path-A constrained pullback with P-6 Jacobian to obtain physical ΔE_nℓ."
+    },
+    {
+      "step": 3,
+      "title": "Constrained χ-derivative, Stance declaration, P-6 Jacobian weighting, and ℓ-selectivity",
+      "accepted_at": "2026-04-17T00:00:00Z",
+      "accepted_by": "Kip Madden",
+      "acceptance_text": "ACCEPT Step 3",
+      "stance_declaration": "Stance B: physical matrix element uses 5D-projected measure with Jacobian J = α·r³·sin(θ_pol); ⟨Ô⟩ = ∫J·d³r·Ψ*₄D·Ô·Ψ₄D where Ψ₄D are standard hydrogen eigenfunctions normalized in d³r. Justification from P-6: worldsheet constraint maps d⁵x → J·d³r on constraint surface; P-6 recovery of canonical QM holds perturbatively in α (J→0 as α→0); ΔE is O(α) correction, consistent with P-6 at leading order. Phase 2 owed sanity check: verify that hydrogen eigenfunctions are orthonormal under the PRISM inner product ∫J·d³r·Ψ*Ψ to O(α), and that the Schrödinger equation remains the effective 4D dynamics under Stance B at leading order. Not blocking for Phase 1.",
+      "symbolic_form": {
+        "eq_3_1_pullback": "∂/∂χ = (dr/dθ)·∂/∂r = αr·∂/∂r  [pullback of χ-derivative to worldsheet χ=θ(r); dr/dθ = αr is the correct Jacobian factor]",
+        "eq_3_2_H_chi_eff": "H_χ^eff = -(ℏ²α²/(2m_e))·(r²·∂²/∂r² + r·∂/∂r)  [α² in numerator; (∂/∂χ)² = α²(r²∂²/∂r² + r∂/∂r)]",
+        "eq_3_3_Delta_E_nl": "ΔE_nℓ = -(ℏ²α³/(2m_e))·A_ℓ·I_nℓ",
+        "eq_3_4_A_ell": "A_ℓ = ∫₀^π ∫₀^{2π} |Y_ℓ^0(θ)|²·sin²(θ)·dθ·dφ;  A_0 = π/4,  A_1 = 3π/16",
+        "eq_3_5_I_nl": "I_nℓ = ∫₀^∞ r⁵·R_nℓ(r)·(r²·∂²R_nℓ/∂r² + r·∂R_nℓ/∂r) dr",
+        "eq_3_6_radial_expand": "r²R'' + 2rR' = ℓ(ℓ+1)R + (r²/(n²a₀²) - 2r/a₀)R  [from hydrogen radial Schrödinger eq]",
+        "eq_3_7_operator_applied": "r²R'' + rR' = ℓ(ℓ+1)R + (r²/(n²a₀²) - 2r/a₀)R - rR'",
+        "eq_3_8_Delta_E_nS": "ΔE_nS = -(ℏ²α³/(2m_e))·(π/4)·I_n0 ~ α³·Ry·f(n) > 0"
+      },
+      "variables": {
+        "A_ell": "angular Jacobian-weighted spherical harmonic coefficient; includes sin²θ from J·dΩ; A_0=π/4, A_1=3π/16",
+        "I_nl": "radial integral ∫r⁵·R_nℓ·(r²R''_nℓ + rR'_nℓ) dr; I_n0 < 0 → ΔE_nS > 0",
+        "f_n": "dimensionless n-dependent radial factor; n-scaling evaluated in Step 4"
+      },
+      "ell_selectivity_mechanism": "ℓ(ℓ+1) centrifugal term absent for ℓ=0 in eq_3_7; near-origin R_n0→const (vs R_nℓ→r^ℓ for ℓ>0) gives structurally distinct integrand under r⁵ measure; angular A_ℓ finite for all ℓ but numerically distinct",
+      "magnitude_estimate": "α³·Ry ≈ 5.3×10⁻⁶ eV; 2S Lamb shift target ≈ 4.4×10⁻⁶ eV; n-scaling evaluated in Step 4",
+      "postulates_used": ["P-2", "P-3", "P-6"],
+      "new_postulates_introduced": [],
+      "choice_points": [],
+      "halts_triggered": [],
+      "c3_note": "RESOLVED non-choice. Path-A (constrained pullback) is physical; Path-B (Fourier regularization) was well-posedness milestone. Step 2 eq_2_6_Delta_E_nl annotated superseded_by_step_3: true.",
+      "c4_note": "RESOLVED. J enters exactly once in both ⟨Ψ|Ĥ_χ|Ψ⟩ (numerator) and ⟨Ψ|Ψ⟩_PRISM (denominator). Step 4 must compute ΔE_nS as the ratio numerator/denominator with both using the J-weighted measure, not substitute J naively into a standard normalization. Hydrogen states are NOT ∫J·d³r-orthonormal; PRISM normalization factor is n,ℓ-dependent and affects final n-scaling.",
+      "h1_note": "SUSPENDED per Kip directive. Corrected α² numerator in eq_3_2 resolves magnitude blow-up. Will resurface only if Step 4 fails condition (ii).",
+      "stance_reporter_action": "Reporter to tighten prism_formal_spec.md §P-6 to record Stance B commitment: projected inner product uses ∫J·d³r measure; Stance A (J absorbed) is not adopted.",
+      "output_for_next_step": "Evaluate I_n0 = ∫₀^∞ r⁵·R_n0(r)·(r²R''_n0 + rR'_n0) dr and PRISM normalization N_n0 = ∫₀^∞ α·r⁵·|R_n0|² dr for n=1..5 analytically; form ΔE_nS = -(ℏ²α³/(2m_e))·(π/4)·I_n0 / N_n0; extract β_PRISM(n,s); compare to Drake-Swainson 1990."
     }
   ],
-  "pending_directive": null,
+  "pending_directive": {
+    "from": "Kip Madden",
+    "issued_at": "2026-04-17",
+    "type": "DIRECTIVE",
+    "applies_to": "Step 4",
+    "directive_text": "Step 4 evaluates I_n0 for n=1,2,3,4,5 analytically via hydrogen radial wavefunctions and produces the PRISM prediction for β_PRISM(n) analog of the Bethe logarithm.",
+    "required_deliverables": [
+      {
+        "id": "4a",
+        "description": "Compute ⟨Ψ_n0|Ψ_n0⟩_PRISM = ∫₀^∞ α·r⁵·|R_n0(r)|² dr for n=1..5. This is the PRISM normalization of s-states. Show it explicitly; do not assume it equals 1."
+      },
+      {
+        "id": "4b",
+        "description": "Compute ⟨Ψ_n0|Ĥ_χ|Ψ_n0⟩ = -(ℏ²α³/(2m_e))·(π/4)·I_n0 for n=1..5 with I_n0 defined per eq_3_5."
+      },
+      {
+        "id": "4c",
+        "description": "The physical PRISM s-state energy correction is ΔE_nS = (4b)/(4a). Compute this ratio for n=1..5."
+      },
+      {
+        "id": "4d",
+        "description": "Express ΔE_nS in Bethe-log form: ΔE_nS = (4α³/3π)·Ry·β_PRISM(n,s)/n³ and extract β_PRISM(n,s) for n=1..5."
+      },
+      {
+        "id": "4e",
+        "description": "Target comparison (Drake-Swainson 1990): n=1: β=2.984128556, n=2: β=2.811769893, n=3: β=2.767663612, n=4: β=2.749811840, n=5: β=2.740823727"
+      },
+      {
+        "id": "4f",
+        "description": "Compute fractional deviation (β_PRISM - β_DS)/β_DS for n=1..5."
+      }
+    ],
+    "success_criterion": "|deviation| < 10⁻³ for all n AND consistent-sign deviation pattern",
+    "failure_criterion": "deviation > 50% or mixed-sign",
+    "method": "Use SymPy for analytic evaluation. Hydrogen R_nℓ(r) for n=1..5, ℓ=0 have closed forms. Do NOT numerical-integrate — keep symbolic and reduce at the end.",
+    "cp2_note": "After Step 4 completes, Kip reviews the β_PRISM values before P1-T5 dispatches the validator. cp2 fires formally at that review, per Kip's previous commitment and the retroactive recognition that Stance B is a cp2-scale commitment."
+  },
   "tex_artifact": "working_dir/derivations/P1-T3_s_state_correction.tex",
   "log_artifact": "working_dir/derivations/derivation_log.md"
 }

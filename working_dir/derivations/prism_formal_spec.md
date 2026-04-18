@@ -141,6 +141,8 @@ The s-state extra coupling is NOT postulated. It emerges from the small-r behavi
 > **Source:** Notes §4, P-6. Notes §3 F6: "s-state extra coupling is DERIVED from P-2/P-4/P-6 small-r behavior of ψ_s, not postulated."
 >
 > **Flag F6: RESOLVED.** s-state coupling is derived. No new postulate needed.
+>
+> **Stance B commitment (recorded at P1-T3 Step 3 ACCEPT, 2026-04-17):** The physical matrix element ⟨Ô⟩ is defined using the 5D-projected measure ∫J·d³r, where J = α·r₀³·exp(3αθ)·sin(θ_pol) is the embedding Jacobian from P-2/P-3, and Ψ₄D are the standard hydrogen eigenfunctions normalized in d³r. Stance A (J absorbed into Ψ₄D normalization, standard d³r measure) is **not** adopted. The hydrogen eigenfunctions are not ∫J·d³r-orthonormal; the PRISM normalization ⟨Ψ_n0|Ψ_n0⟩_PRISM = ∫α·r⁵·|R_n0|²dr is n-dependent and must be computed explicitly in P1-T4. P-6 recovers canonical QM perturbatively in α (J→0 as α→0); ΔE_nS is itself O(α), consistent with P-6 at leading order. Phase 2 sanity check owed: verify orthonormality to O(α) and confirm Schrödinger equation as effective 4D dynamics under Stance B.
 
 ---
 
